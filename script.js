@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
      Shows for 2s then fades out with scale effect
      ────────────────────────────────────────────── */
   const splash = document.getElementById('splash-screen');
+   document.body.style.overflow = 'hidden';
+document.documentElement.scrollTop = 0;
 
   if (splash) {
     // Wait 2 seconds then fade out
@@ -17,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2000);
 
     // Remove from DOM after transition ends
-    splash.addEventListener('transitionend', () => {
+    splash.addEventListener('transitionend', (document.body.style.overflow = '';) => {
       splash.style.display = 'none';
     });
   }
