@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veer Ji Fast Food Corner | Premium Street Food — Jansath</title>
+  <meta name="description" content="Experience luxury street food at Veer Ji Fast Food Corner, Chhabra Colony, Jansath. Chowmein, Momos, Burgers, Manchurian & more. Order now!">
+  <meta name="keywords" content="Veer Ji Fast Food, Jansath, street food, momos, chowmein, burger, fast food corner">
+
+  <!-- Google Fonts — Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { 'inter': ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            gold: { 400: '#E0B65E', 500: '#D4A853', 600: '#B8923A' },
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="font-inter">
+
+  <!-- ============================================
+       SECTION 1: SPLASH SCREEN
+       ============================================ -->
+  <div id="splash-screen">
+    <!-- Mascot Image — REPLACE: images/mascot.jpg with your mascot file -->
+    <img
+      src="images/mascot.jpg"
+      alt="Veer Ji Fast Food Mascot"
+      class="mascot-img"
+    >
+    <h1 class="welcome-text">Welcome Ji</h1>
+    <p class="welcome-sub">Veer Ji Fast Food Corner</p>
+  </div>
+
+
+  <!-- ============================================
+       MAIN WRAPPER — Background transitions here
+       ============================================ -->
+  <div id="bg-wrapper">
+
+    <!-- ============================================
+         SECTION 2: HERO PRODUCT — White Sauce Pasta
+         ============================================ -->
+    <section
+      class="hero-section"
+      data-bg="#F5F0E8"
+      data-bg-light="true"
+    >
+      <span class="hero-brand">Veer Ji Fast Food Corner</span>
+      <h1 class="hero-title">White Sauce Pasta</h1>
+      <p class="hero-subtitle">Rich, creamy, and irresistibly cheesy — our signature dish that keeps you coming back.</p>
+
+      <!-- Hero Image with Floating Glass Tags & Pedestal -->
+      <div class="product-stage">
+        <div class="product-base"></div>
+        <!-- Glassmorphism floating tags -->
+        <div class="glass-tag tag-creamy">🧀 Creamy</div>
+        <div class="glass-tag tag-spicy">🌶️ Spicy</div>
+        <div class="glass-tag tag-special">⭐ Chef's Special</div>
+
+        <!-- REPLACE: images/white_sauce_pasta.png with your hero food photo -->
+        <img
+          src="images/white_sauce_pasta.png"
+          alt="White Sauce Pasta"
+          class="hero-food-img"
+        >
+      </div>
+
+      <!-- Order Now Button -->
+      <a href="#menu" class="glow-btn">Order Now</a>
+    </section>
+
+
+    <!-- ============================================
+         SECTION 3: ZIG-ZAG MAIN MENU — 8 Items
+         ============================================ -->
+    <div id="menu">
+
+      <!-- ——— ITEM 1: CHOWMEIN (Image LEFT, Text RIGHT) ——— -->
+      <section
+        class="menu-item-section scroll-reveal"
+        data-bg="#1C1208"
+        data-bg-light="false"
+      >
+        <div class="menu-item-inner">
+          <div class="menu-img-side">
+            <div class="product-stage">
+              <div class="product-base"></div>
+              <div class="glass-tag tag-creamy">🍝 Wok Tossed</div>
+              <div class="glass-tag tag-spicy">🌶️ Spicy Blend</div>
+              <div class="glass-tag tag-special">🥬 Fresh Veggies</div>
+              <!-- REPLACE: images/chowmein.png -->
+              <img src="images/chowmein.png" alt="Chowmein" class="food-img">
+            </div>
+          </div>
+          <div class="menu-text-side">
+            <h2 class="menu-item-name">Chowmein</h2>
+            <p class="menu-item-desc">Stir-fried hakka noodles tossed with fresh vegetables, soy sauce, and our secret spice blend. A street food classic reinvented with Veer Ji's signature touch.</p>
+            <span class="menu-item-price">₹60 onwards</span>
+            <a href="#" class="view-btn">View Varieties</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ——— ITEM 2: MOMOS (Text LEFT, Image RIGHT) ——— -->
+      <section
+        class="menu-item-section scroll-reveal"
+        data-bg="#1A1520"
+        data-bg-light="false"
+      >
+        <div class="menu-item-inner reverse">
+          <div class="menu-img-side">
+            <div class="product-stage">
+              <div class="product-base"></div>
+              <div class="glass-tag tag-creamy">🥟 Hand-Folded</div>
+              <div class="glass-tag tag-spicy">🌶️ Spicy Dip</div>
+              <div class="glass-tag tag-special">⭐ Steamed Juicy</div>
+              <!-- REPLACE: images/momos.png -->
+              <img src="images/momos.png" alt="Momos" class="food-img">
+            </div>
+          </div>
+          <div class="menu-text-side">
+            <h2 class="menu-item-name">Momos</h2>
+            <p class="menu-item-desc">Hand-folded steamed dumplings bursting with spiced filling, served with our fiery house-made red chutney. Soft, juicy, and addictive.</p>
+            <span class="menu-item-price">₹50 onwards</span>
+            <a href="#" class="view-btn">View Varieties</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ——— ITEM 3: BURGER (Image LEFT, Text RIGHT) ——— -->
+      <section
+        class="menu-item-section scroll-reveal"
+        data-bg="#1A1209"
+        data-bg-light="false"
+      >
+        <div class="menu-item-inner">
+          <div class="menu-img-side">
+            <div class="product-stage">
+              <div class="product-base"></div>
+              <div class="glass-tag tag-creamy">🍔 Double Stack</div>
+              <div class="glass-tag tag-spicy">🧀 Melted Cheese</div>
+              <div class="glass-tag tag-special">🔥 Grilled Crisp</div>
+              <!-- REPLACE: Update this URL with your own burger photo -->
+              <img
+                src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80"
+                alt="Burger"
+                class="food-img"
+              >
+            </div>
+          </div>
+          <div class="menu-text-side">
+            <h2 class="menu-item-name">Burger</h2>
+            <p class="menu-item-desc">Double-stacked loaded burger with melted cheese, crisp lettuce, fresh tomato, and our signature smoky sauce between toasted sesame buns.</p>
+            <span class="menu-item-price">₹70 onwards</span>
+            <a href="#" class="view-btn">View Varieties</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ——— ITEM 4: CHILLI POTATO (Text LEFT, Image RIGHT) ——— -->
+      <section
+        class="menu-item-section scroll-reveal"
+        data-bg="#2D0A0A"
+        data-bg-light="false"
+      >
+        <div class="menu-item-inner reverse">
+          <div class="menu-img-side">
+            <div class="product-stage">
+              <div class="product-base"></div>
+              <div class="glass-tag tag-creamy">🍟 Honey Glaze</div>
+              <div class="glass-tag tag-spicy">🌶️ Fiery Crunch</div>
+              <div class="glass-tag tag-special">🌱 Sesame Topping</div>
+              <!-- REPLACE: Update this URL with your own chilli potato photo -->
+              <img
+                src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?auto=format&fit=crop&w=600&q=80"
+                alt="Chilli Potato"
+                class="food-img"
+              >
+            </div>
+          </div>
+          <div class="menu-text-side">
+            <h2 class="menu-item-name">Chilli Potato</h2>
+            <p class="menu-item-desc">Crispy golden potato fingers tossed in a fiery, tangy sauce with colourful bell peppers, green chillies, and fresh spring onions. Crunchy heat in every bite.</p>
+            <span class="menu-item-price">₹70 onwards</span>
+            <a href="#" class="view-btn">View Varieties</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ——— ITEM 5: MANCHURIAN (Image LEFT, Text RIGHT) ——— -->
+      <section
+        class="menu-item-section scroll-reveal"
+        data-bg="#1E1508"
+        data-bg-light="false"
+      >
+        <div class="menu-item-inner">
+          <div class="menu-img-side">
+            <div class="product-stage">
+              <div class="product-base"></div>
+              <div class="glass-tag tag-creamy">🥘 Rich Gravy</div>
+              <div class="glass-tag tag-spicy">🧄 Garlic Infused</div>
+              <div class="glass-tag tag-special">⭐ Indo-Chinese</div>
+              <!-- REPLACE: Update this URL with your own manchurian photo -->
+              <img
+                src="https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=600&q=80"
+                alt="Manchurian"
+                class="food-img"
+              >
+            </div>
+          </div>
+          <div class="menu-text-side">
+            <h2 class="menu-item-name">Manchurian</h2>
+            <p class="menu-item-desc">Crispy fried vegetable balls smothered in a rich, savory manchurian gravy with soy, ginger, and garlic. Indo-Chinese perfection at its finest.</p>
+            <span class="menu-item-price">₹80 onwards</span>
+            <a href="#" class="view-btn">View Varieties</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ——— ITEM 6: SPRING ROLL (Text LEFT, Image RIGHT) ——— -->
+      <section
+        class="menu-item-section scroll-reveal"
+        data-bg="#1A1406"
+        data-bg-light="false"
+      >
+        <div class="menu-item-inner reverse">
+          <div class="menu-img-side">
+            <div class="product-stage">
+              <div class="product-base"></div>
+              <div class="glass-tag tag-creamy">🫔 Golden Fry</div>
+              <div class="glass-tag tag-spicy">🥬 Veg Stuffed</div>
+              <div class="glass-tag tag-special">🍯 Sweet Chilli</div>
+              <!-- REPLACE: Update this URL with your own spring roll photo -->
+              <img
+                src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=600&q=80"
+                alt="Spring Roll"
+                class="food-img"
+              >
+            </div>
+          </div>
+          <div class="menu-text-side">
+            <h2 class="menu-item-name">Spring Roll</h2>
+            <p class="menu-item-desc">Crunchy golden rolls stuffed with seasoned shredded vegetables, deep-fried to crispy perfection, served with our sweet chilli dipping sauce.</p>
+            <span class="menu-item-price">₹60 onwards</span>
+            <a href="#" class="view-btn">View Varieties</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ——— ITEM 7: MACARONI (Image LEFT, Text RIGHT) — LIGHT BG ——— -->
+      <section
+        class="menu-item-section scroll-reveal light-bg"
+        data-bg="#F0E6D4"
+        data-bg-light="true"
+      >
+        <div class="menu-item-inner">
+          <div class="menu-img-side">
+            <div class="product-stage">
+              <div class="product-base"></div>
+              <div class="glass-tag tag-creamy">🧀 Extra Cheesy</div>
+              <div class="glass-tag tag-spicy">🍅 Masala Fusion</div>
+              <div class="glass-tag tag-special">❤️ Kids Favourite</div>
+              <!-- REPLACE: Update this URL with your own macaroni photo -->
+              <img
+                src="https://images.unsplash.com/photo-1543339494-b4cd4f7ba686?auto=format&fit=crop&w=600&q=80"
+                alt="Macaroni"
+                class="food-img"
+              >
+            </div>
+          </div>
+          <div class="menu-text-side">
+            <h2 class="menu-item-name">Macaroni</h2>
+            <p class="menu-item-desc">Creamy Indian-style masala macaroni loaded with cheese, vegetables, and our special spice twist. A warm, comforting favourite for all ages.</p>
+            <span class="menu-item-price">₹60 onwards</span>
+            <a href="#" class="view-btn">View Varieties</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ——— ITEM 8: CHOLE BHATURE (Text LEFT, Image RIGHT) ——— -->
+      <section
+        class="menu-item-section scroll-reveal"
+        data-bg="#261A0D"
+        data-bg-light="false"
+      >
+        <div class="menu-item-inner reverse">
+          <div class="menu-img-side">
+            <div class="product-stage">
+              <div class="product-base"></div>
+              <div class="glass-tag tag-creamy">👑 Street King</div>
+              <div class="glass-tag tag-spicy">🧅 Fluffy Gold</div>
+              <div class="glass-tag tag-special">✨ Spiced Chole</div>
+              <!-- REPLACE: Update this URL with your own chole bhature photo -->
+              <img
+                src="https://images.unsplash.com/photo-1626132647523-66f5bf380027?auto=format&fit=crop&w=600&q=80"
+                alt="Chole Bhature"
+                class="food-img"
+              >
+            </div>
+          </div>
+          <div class="menu-text-side">
+            <h2 class="menu-item-name">Chole Bhature</h2>
+            <p class="menu-item-desc">Fluffy, golden-fried bhatura paired with rich, spiced chickpea curry. The ultimate North Indian feast that defines street food royalty.</p>
+            <span class="menu-item-price">₹80 onwards</span>
+            <a href="#" class="view-btn">View Varieties</a>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /menu -->
+
+
+    <!-- ============================================
+         SECTION 4: INTERACTIVE COLD DRINK BAR
+         ============================================ -->
+    <section
+      class="drinks-section scroll-reveal"
+      data-bg="#0A0A0A"
+      data-bg-light="false"
+    >
+      <h2 class="drinks-title">The Cold Drink Bar</h2>
+      <p class="drinks-subtitle">Tap a drink to pour it into the glass</p>
+
+      <div class="drinks-layout">
+
+        <!-- LEFT DRINK COLUMN -->
+        <div class="drink-column">
+          <!--
+            EDITABLE DRINKS — Change data-drink-name, data-liquid-from, data-liquid-to
+            to add or modify drinks anytime.
+          -->
+          <button
+            class="drink-thumb active"
+            data-drink-name="Pepsi"
+            data-liquid-from="#2A1505"
+            data-liquid-to="#0D0704"
+            onclick="return false;"
+          >
+            <div class="drink-circle" style="background: linear-gradient(135deg, #004B93, #001F3F);"></div>
+            <span>Pepsi</span>
+          </button>
+
+          <button
+            class="drink-thumb"
+            data-drink-name="Fanta"
+            data-liquid-from="#FF8C00"
+            data-liquid-to="#CC5500"
+            onclick="return false;"
+          >
+            <div class="drink-circle" style="background: linear-gradient(135deg, #FF6B00, #E85500);"></div>
+            <span>Fanta</span>
+          </button>
+
+          <button
+            class="drink-thumb"
+            data-drink-name="Sprite"
+            data-liquid-from="#C8E6C0"
+            data-liquid-to="#90D890"
+            onclick="return false;"
+          >
+            <div class="drink-circle" style="background: linear-gradient(135deg, #006B3F, #00A550);"></div>
+            <span>Sprite</span>
+          </button>
+        </div>
+
+        <!-- CENTER GLASS -->
+        <div class="glass-wrapper">
+          <div class="glass-container">
+            <div class="glass-shape">
+              <!-- Glass Rim -->
+              <div class="glass-rim"></div>
+
+              <!-- Liquid — color changes on drink selection -->
+              <div id="liquid" class="liquid" style="background: linear-gradient(180deg, #2A1505 0%, #0D0704 100%);">
+                <!-- Bubbles -->
+                <div class="bubble bubble-1"></div>
+                <div class="bubble bubble-2"></div>
+                <div class="bubble bubble-3"></div>
+                <div class="bubble bubble-4"></div>
+              </div>
+
+              <!-- Ice Cubes -->
+              <div class="ice-cube ice-1"></div>
+              <div class="ice-cube ice-2"></div>
+              <div class="ice-cube ice-3"></div>
+
+              <!-- Glass Highlight Reflection -->
+              <div class="glass-highlight"></div>
+
+              <!-- Condensation Drops -->
+              <div class="condensation cond-1"></div>
+              <div class="condensation cond-2"></div>
+              <div class="condensation cond-3"></div>
+            </div>
+          </div>
+
+          <!-- Current Drink Name -->
+          <div>
+            <p id="drink-name" class="drink-label">Pepsi</p>
+            <p class="drink-label-sub">Chilled & Fresh</p>
+          </div>
+        </div>
+
+        <!-- RIGHT DRINK COLUMN -->
+        <div class="drink-column">
+          <button
+            class="drink-thumb"
+            data-drink-name="Thumbs Up"
+            data-liquid-from="#3D1A0A"
+            data-liquid-to="#150804"
+            onclick="return false;"
+          >
+            <div class="drink-circle" style="background: linear-gradient(135deg, #CC0000, #8B0000);"></div>
+            <span>Thumbs Up</span>
+          </button>
+
+          <button
+            class="drink-thumb"
+            data-drink-name="Campa Cola"
+            data-liquid-from="#1F0E05"
+            data-liquid-to="#0A0503"
+            onclick="return false;"
+          >
+            <div class="drink-circle" style="background: linear-gradient(135deg, #1A1A1A, #333333);"></div>
+            <span>Campa Cola</span>
+          </button>
+
+          <button
+            class="drink-thumb"
+            data-drink-name="Campa Orange"
+            data-liquid-from="#F77F00"
+            data-liquid-to="#CC5500"
+            onclick="return false;"
+          >
+            <div class="drink-circle" style="background: linear-gradient(135deg, #FF8C00, #E85D04);"></div>
+            <span>Campa Orange</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================
+         SECTION 5: FOOTER
+         ============================================ -->
+    <footer class="footer-section" data-bg="#0D0D0D" data-bg-light="false">
+      <div class="footer-inner">
+
+        <!-- Brand & Address -->
+        <div class="mb-8">
+          <h3 class="footer-brand">Veer Ji Fast Food Corner</h3>
+          <p class="footer-address">Chhabra Colony, Jansath, Muzaffarnagar, Uttar Pradesh</p>
+        </div>
+
+        <!-- Social Icons + Contact — Row -->
+        <div class="flex flex-wrap items-center gap-6 mb-8">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+            </svg>
+          </a>
+
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+
+          <!-- Phone Contact -->
+          <!-- REPLACE: Update the phone number below -->
+          <a href="tel:+919876543210" class="contact-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+            Contact Us
+          </a>
+        </div>
+
+        <!-- Google Map Embed Placeholder -->
+        <!-- REPLACE: Paste your Google Maps embed URL below -->
+        <div class="map-placeholder mb-8">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27901.76!2d77.34!3d29.32!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390c5e4d6e4e1d5d%3A0x3d0b1c5e8f5b5b5b!2sJansath%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Veer Ji Fast Food Location"
+          ></iframe>
+        </div>
+
+        <!-- Copyright -->
+        <p class="copyright">&copy; 2026 Veer Ji Fast Food Corner. All rights reserved. Made with ❤️ in Jansath.</p>
+
+      </div>
+    </footer>
+
+  </div><!-- /bg-wrapper -->
+
+
+  <!-- Main JavaScript -->
+  <script src="script.js"></script>
+
+</body>
+</html>
