@@ -36,7 +36,9 @@ document.documentElement.scrollTop = 0;
   if (heroVideo) {
     // Show video once loaded
     heroVideo.addEventListener('loadeddata', () => {
-      heroVideo.classList.add('loaded');
+  heroVideo.style.opacity = '2';
+});
+heroVideo.style.opacity = '2'; // show immediately as fallback
     });
 
     // After video ends (plays once), show hero text + scroll hint
