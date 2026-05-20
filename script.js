@@ -10,16 +10,21 @@ document.addEventListener('DOMContentLoaded', () => {
      ────────────────────────────────────────────── */
   const splash = document.getElementById('splash-screen');
 
+  // Lock scroll + force page to top immediately
+  document.body.style.overflow = 'hidden';
+  window.scrollTo(0, 0);
+
   if (splash) {
-    // Wait 2 seconds then fade out
     setTimeout(() => {
       splash.classList.add('fade-out');
-    }, 2000);
 
-    // Remove from DOM after transition ends
-    splash.addEventListener('transitionend', () => {
-      splash.style.display = 'none';
-    });
+      // Force remove after 1s regardless of transitionend
+      setTimeout(() => {
+        splash.style.display = 'none';
+        document.body.style.overflow = '';
+      }, 1000);
+
+    }, 2000);
   }
 
 
