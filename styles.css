@@ -6,7 +6,12 @@
    - Change fonts: edit --font-display and --font-body
    - Change splash background: edit --bg-splash
    ============================================================ */
-
+/* ADD THIS to the html/body section at top of styles.css */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  overflow-y: scroll; /* ADD THIS LINE */
+}
 :root {
   --gold: #D4A853;
   --gold-light: #E8C47A;
