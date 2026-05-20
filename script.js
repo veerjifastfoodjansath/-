@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const scrollHint = document.getElementById('scroll-hint');
 
   if (heroVideo) {
-    heroVideo.addEventListener('loadeddata', () => {
-      heroVideo.classList.add('loaded');
+    // Force visible immediately
+    heroVideo.style.opacity = '1';
     });
 
     heroVideo.addEventListener('ended', () => {
