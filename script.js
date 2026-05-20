@@ -322,5 +322,3 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-
-});
