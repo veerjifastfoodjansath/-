@@ -322,3 +322,5 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+}); // THIS IS THE CLOSING BRACKET THAT WAS MISSING!
