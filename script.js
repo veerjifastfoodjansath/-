@@ -7,16 +7,23 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ──────────────────────────────────────────────
      PART 1: SPLASH SCREEN
      ────────────────────────────────────────────── */
-  const splash = document.getElementById('splash-screen');
+ const splash = document.getElementById('splash-screen');
+
+  // Lock scroll + force page to top immediately
+  document.body.style.overflow = 'hidden';
+  window.scrollTo(0, 0);
 
   if (splash) {
     setTimeout(() => {
       splash.classList.add('fade-out');
-    }, 2000);
 
-    splash.addEventListener('transitionend', () => {
-      splash.style.display = 'none';
-    });
+      // Force remove after 1s regardless of transitionend
+      setTimeout(() => {
+        splash.style.display = 'none';
+        document.body.style.overflow = '';
+      }, 1000);
+
+    }, 2000);
   }
 
   /* ──────────────────────────────────────────────
