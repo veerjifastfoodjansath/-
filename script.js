@@ -182,6 +182,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const drinkPrice = slide.dataset.drinkPrice;
 
     // Drain liquid first then refill with new color
+    // Update centre bottle image
+    const bottleImg = document.getElementById('active-bottle-img');
+    if (bottleImg) {
+      bottleImg.style.opacity = '0';
+      bottleImg.style.transform = 'scale(0.85)';
+      setTimeout(() => {
+        const newSrc = slide.querySelector('img')?.src;
+        if (newSrc) bottleImg.src = newSrc;
+        bottleImg.style.opacity = '1';
+        bottleImg.style.transform = 'scale(1)';
+      }, 200);
+    }
+
+    // Drain liquid first then refill with new color
+    if (glassLiquid) {
     if (glassLiquid) {
       glassLiquid.style.height = '5%';
 
