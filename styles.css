@@ -149,7 +149,7 @@ body {
   transition: opacity 0.8s ease;
 }
 
-#hero-video.loaded { opacity: 1; }
+#hero-video.loaded { opacity: 2; }
 
 .video-overlay {
   position: absolute;
