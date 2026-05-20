@@ -19,10 +19,10 @@ document.documentElement.scrollTop = 0;
     }, 2000);
 
     // Remove from DOM after transition ends
-    splash.addEventListener('transitionend', (document.body.style.overflow = '';) => {
-      splash.style.display = 'none';
-    });
-  }
+    splash.addEventListener('transitionend', () => {
+  splash.style.display = 'none';
+  document.body.style.overflow = ''; // unlock scroll after splash
+});
 
 
   /* ──────────────────────────────────────────────
