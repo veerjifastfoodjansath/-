@@ -37,10 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const scrollHint = document.getElementById('scroll-hint');
 
   if (heroVideo) {
-    // Show video once loaded
-    heroVideo.addEventListener('loadeddata', () => {
-      heroVideo.classList.add('loaded');
-    });
+    // Force visible immediately
+    heroVideo.style.opacity = '1';
 
     // After video ends (plays once), show hero text + scroll hint
     heroVideo.addEventListener('ended', () => {
