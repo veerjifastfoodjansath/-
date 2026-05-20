@@ -9,25 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
      Shows for 2s then fades out with scale effect
      ────────────────────────────────────────────── */
   const splash = document.getElementById('splash-screen');
-   document.body.style.overflow = 'hidden';
-document.documentElement.scrollTop = 0;
 
   if (splash) {
     // Wait 2 seconds then fade out
-   setTimeout(() => {
-  splash.classList.add('fade-out');
-  // Force remove after 3s as fallback
-  setTimeout(() => {
-    splash.style.display = 'none';
-    document.body.style.overflow = '';
-  }, 1000);
-}, 2000);
+    setTimeout(() => {
+      splash.classList.add('fade-out');
+    }, 2000);
 
     // Remove from DOM after transition ends
     splash.addEventListener('transitionend', () => {
-  splash.style.display = 'none';
-  document.body.style.overflow = ''; // unlock scroll after splash
-});
+      splash.style.display = 'none';
+    });
+  }
 
 
   /* ──────────────────────────────────────────────
@@ -41,9 +34,7 @@ document.documentElement.scrollTop = 0;
   if (heroVideo) {
     // Show video once loaded
     heroVideo.addEventListener('loadeddata', () => {
-  heroVideo.style.opacity = '2';
-});
-heroVideo.style.opacity = '2'; // show immediately as fallback
+      heroVideo.classList.add('loaded');
     });
 
     // After video ends (plays once), show hero text + scroll hint
@@ -188,17 +179,6 @@ heroVideo.style.opacity = '2'; // show immediately as fallback
     const drinkPrice = slide.dataset.drinkPrice;
 
     // Drain liquid first then refill with new color
-     // Update bottle image
-const bottleImg = document.getElementById('active-bottle-img');
-if (bottleImg) {
-  bottleImg.style.opacity = '0';
-  bottleImg.style.transform = 'scale(0.9)';
-  setTimeout(() => {
-    bottleImg.src = slide.querySelector('img')?.src || '';
-    bottleImg.style.opacity = '1';
-    bottleImg.style.transform = 'scale(1)';
-  }, 200);
-}
     if (glassLiquid) {
       glassLiquid.style.height = '5%';
 
