@@ -493,7 +493,6 @@
           SHOP_LOCATION.lat, SHOP_LOCATION.lng,
           userLocation.lat, userLocation.lng
         );
-        deliveryCharge = Math.round(distanceMeters * RATE_PER_METER * 100) / 100;
         renderCart();
       },
       // ERROR
@@ -520,16 +519,15 @@
   }
 
   /* ── BUILD WHATSAPP MESSAGE ── */
-  function buildWhatsAppMsg(cart, subtotal, delivery, packaging, total) {
-    let msg = `Hello Veer Ji Fast Food! 🙏\n\nI want to order:\n\n`;
+  function buildWhatsAppMsg(cart, subtotal, delivery, total) {
+    let msg = `Hello,Veer Ji Fast Food! 🙏\n\nI want to order:\n\n`;
     cart.forEach(item => {
       msg += `• ${item.name} (${item.parent}) × ${item.qty} = ₹${item.price * item.qty}\n`;
     });
-    msg += `\n📍 My Location: https://www.google.com/maps?q=${userLocation.lat},${userLocation.lng}`;
+    msg += `\n📍 My Location: https://www.google.com/maps/dir/${SHOP_LOCATION.lat},${SHOP_LOCATION.lng}/${userLocation.lat},${userLocation.lng}`;
     msg += `\n📏 Distance: ${(distanceMeters/1000).toFixed(2)} km`;
     msg += `\n\n*Subtotal:* ₹${subtotal}`;
-    msg += `\n*Delivery (${Math.round(distanceMeters)}m × ₹0.015):* ₹${delivery}`;
-    msg += `\n*Packaging:* ₹${packaging}`;
+    msg += `\n*Delivery:* ${delivery === 0 ? 'Free' : '₹' + delivery}`;
     msg += `\n*TOTAL: ₹${total}*\n\nPlease confirm my order. Thank you!`;
     return msg;
   }
@@ -558,8 +556,29 @@
 
     const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
     const locationGranted = userLocation !== null;
+    // --- NEW LOGIC: DELIVERY RULES ---
+    let deliveryCharge = 0;
+    let deliveryText = "";
+    let canDeliver = true;
+
+    if (locationGranted) {
+      if (distanceMeters > 5000) {
+        canDeliver = false; // Beyond 5km - No delivery
+        deliveryText = "Out of delivery area (> 5km)";
+      } else if (distanceMeters <= 300) {
+        deliveryCharge = 0; // Free under 300m
+        deliveryText = "Free (Under 300m)";
+      } else if (distanceMeters <= 3000 && subtotal > 149) {
+        deliveryCharge = 0; // Free under 3km if order > ₹149
+        deliveryText = "Free (Order > ₹149)";
+      } else {
+        // Standard charge for everything else
+        deliveryCharge = Math.round(distanceMeters * RATE_PER_METER * 100) / 100;
+        deliveryText = `₹${deliveryCharge} (${Math.round(distanceMeters)}m × ₹0.015/m)`;
+      }
+    }
     const total = locationGranted
-      ? Math.round((subtotal + deliveryCharge + PACKAGING_CHARGE) * 100) / 100
+      ? Math.round((subtotal + deliveryCharge) * 100) / 100
       : subtotal;
 
     wrap.innerHTML = `
@@ -613,24 +632,13 @@
         </div>
         ${locationGranted ? `
           <div class="summary-row highlight">
-            <span>
-              Delivery Charge
-              <div class="distance-info">${Math.round(distanceMeters)}m × ₹0.015/m</div>
-            </span>
-            <span>₹${deliveryCharge}</span>
-          </div>
-          <div class="summary-row">
-            <span>Packaging & Handling</span>
-            <span>₹${PACKAGING_CHARGE}</span>
+            <span>Delivery Charge</span>
+            <span>${deliveryText}</span>
           </div>
         ` : `
           <div class="summary-row" style="color: rgba(255,255,255,0.3); font-style: italic;">
             <span>Delivery Charge</span>
             <span>Grant location to calculate</span>
-          </div>
-          <div class="summary-row" style="color: rgba(255,255,255,0.3); font-style: italic;">
-            <span>Packaging</span>
-            <span>—</span>
           </div>
         `}
         <div class="summary-row total">
@@ -639,6 +647,51 @@
         </div>
       </div>
 
+      <div class="action-buttons">
+
+        ${locationGranted && canDeliver ? `
+          <a
+            href="https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(buildWhatsAppMsg(cart, subtotal, deliveryCharge, total))}"
+            target="_blank"
+            class="btn-order btn-whatsapp"
+          >
+            📲 Order via WhatsApp
+          </a>
+          <a href="tel:+${PHONE_NUMBER}" class="btn-order">
+            📞 Call to Order — +91 92861 75004
+          </a>
+        ` : locationGranted && !canDeliver ? `
+          <button class="btn-order btn-whatsapp disabled" disabled>
+            🚫 Too Far (Max 5km)
+          </button>
+          <div class="checkout-warning" style="color: var(--red); border-color: var(--red);">
+            ⚠️ <strong>Sorry, we do not deliver beyond 5km!</strong><br>
+            Your location is ${(distanceMeters/1000).toFixed(2)} km away.
+          </div>
+        ` : `
+          <button class="btn-order btn-whatsapp disabled" disabled>
+            🔒 Grant Location to Order via WhatsApp
+          </button>
+          <button class="btn-order disabled" disabled>
+            🔒 Grant Location to Call
+          </button>
+          <div class="checkout-warning">
+            ⚠️ <strong>Location batane pr hi checkout kar payenge!</strong><br>
+            Please click "Grant Location Access" above to proceed.
+          </div>
+        `}
+
+        <a href="index.html" class="btn-continue">
+          ← Continue Shopping
+        </a>
+      </div>
+
+      <p class="cart-note">
+        ⚠️ Cart resets if you close or refresh the browser.<br>
+        Complete your order before leaving!
+      </p>
+    `;
+  }
       <!-- ACTION BUTTONS -->
       <div class="action-buttons">
 
