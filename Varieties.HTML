@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Varieties — Veer Ji Fast Food</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       VARIETIES PAGE — CSS
+       ============================================================ */
+    :root {
+      --gold: #D4A853;
+      --gold-light: #E8C47A;
+      --dark: #0A0A0A;
+      --dark-2: #111111;
+      --dark-3: #1A1A1A;
+      --white: #F5F2EC;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: var(--font-body);
+      background: var(--dark);
+      color: var(--white);
+      min-height: 100vh;
+    }
+
+    /* ── TOP NAVIGATION (appears on every page) ── */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(212,168,83,0.15);
+    }
+
+    /* Back button */
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 8px 16px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.04);
+    }
+    .nav-back:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Home button */
+    .nav-home {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    /* Cart button */
+    .nav-cart {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 8px 16px;
+      border: 1px solid rgba(212,168,83,0.35);
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      background: rgba(212,168,83,0.06);
+    }
+    .nav-cart:hover {
+      background: rgba(212,168,83,0.14);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    /* Cart item count badge */
+    .cart-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: var(--gold);
+      color: #111;
+      font-size: 0.65rem;
+      font-weight: 700;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      display: none; /* hidden when 0 */
+    }
+    .cart-badge.visible { display: flex; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 3rem 1.5rem 1.5rem;
+      text-align: center;
+      background: linear-gradient(to bottom, #111, var(--dark));
+    }
+
+    .page-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+
+    /* CHANGE PAGE TITLE STYLE HERE if needed */
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 7vw, 3.5rem);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+
+    .page-subtitle {
+      font-size: 0.9rem;
+      color: rgba(245,242,236,0.45);
+      margin-top: 0.5rem;
+      font-weight: 300;
+    }
+
+    /* ── VARIETIES GRID ── */
+    .varieties-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      padding: 1.5rem 1.2rem 3rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 600px) {
+      .varieties-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* Individual variety card */
+    .variety-card {
+      background: var(--dark-3);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.4s var(--ease);
+    }
+
+    .variety-card:hover {
+      border-color: rgba(212,168,83,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(212,168,83,0.08);
+    }
+
+    /* Food image area */
+    .card-img-wrap {
+      background: #161616;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 1rem;
+      position: relative;
+      min-height: 180px;
+    }
+
+    .card-img {
+      width: 140px;
+      height: 140px;
+      object-fit: contain;
+      filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
+      animation: cardFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes cardFloat {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Variety badge (e.g. "Popular") */
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--gold);
+      color: #111;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 50px;
+    }
+
+    /* Card text content */
+    .card-body {
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      flex: 1;
+    }
+
+    .card-name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .card-desc {
+      font-size: 0.78rem;
+      color: rgba(245,242,236,0.5);
+      font-weight: 300;
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .card-price {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    /* Add to Cart / Go to Cart button */
+    .card-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      border-radius: 12px;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.35s var(--bounce);
+      border: none;
+      width: 100%;
+      margin-top: 0.4rem;
+    }
+
+    /* Default: Add to Cart */
+    .card-btn.add {
+      background: var(--gold);
+      color: #111;
+    }
+    .card-btn.add:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(212,168,83,0.3);
+    }
+
+    /* After added: Go to Cart */
+    .card-btn.in-cart {
+      background: rgba(212,168,83,0.1);
+      color: var(--gold);
+      border: 1.5px solid var(--gold);
+    }
+    .card-btn.in-cart:hover {
+      background: rgba(212,168,83,0.2);
+    }
+
+    /* ── TOAST NOTIFICATION ── */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--dark-3);
+      border: 1px solid rgba(212,168,83,0.3);
+      color: var(--white);
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      z-index: 999;
+      transition: transform 0.4s var(--bounce);
+      white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast span { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       TOP NAVIGATION — Home | Back | Cart
+       This nav appears on every secondary page
+       ============================================================ -->
+  <nav class="top-nav">
+
+    <!-- BACK button — goes to previous page -->
+    <a href="javascript:history.back()" class="nav-back">
+      &#8592; Back
+    </a>
+
+    <!-- HOME button — always goes to main page -->
+    <a href="index.html" class="nav-home">Veer Ji</a>
+
+    <!-- CART button — shows item count badge -->
+    <a href="cart.html" class="nav-cart">
+      🛒 Cart
+      <!-- Badge shows number of items in cart -->
+      <span class="cart-badge" id="cart-badge">0</span>
+    </a>
+
+  </nav>
+
+
+  <!-- Page header — title filled by JS from URL param -->
+  <div class="page-header">
+    <p class="page-eyebrow">Choose Your Style</p>
+    <h1 class="page-title" id="page-title">Loading...</h1>
+    <p class="page-subtitle" id="page-subtitle">Pick your favourite variety</p>
+  </div>
+
+
+  <!-- ============================================================
+       VARIETIES GRID — 3 cards filled by JavaScript below
+       ============================================================ -->
+  <div class="varieties-grid" id="varieties-grid">
+    <!-- Cards injected by JS based on URL param ?item=chowmein -->
+  </div>
+
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast">
+    <span id="toast-msg">Added to cart!</span>
+  </div>
+
+
+  <script>
+  /* ============================================================
+     VARIETIES PAGE — JAVASCRIPT
+     ============================================================ */
+
+  /* ──────────────────────────────────────────
+     ALL MENU VARIETIES DATA
+     # TO EDIT: Change name, desc, price, badge for any item
+     # TO ADD A VARIETY: copy one object inside any array
+     ────────────────────────────────────────── */
+  const MENU_DATA = {
+
+    /* ── WHITE SAUCE PASTA ── */
+    'white-sauce': {
+      title: 'White Sauce Pasta',
+      subtitle: 'Creamy, cheesy & irresistible',
+      image: 'images/menu/white-sauce.png',
+      varieties: [
+        {
+          id: 'white-sauce-regular',
+          name: 'Regular Pasta',
+          desc: 'Classic white sauce pasta with fresh veggies and our signature creamy blend.',
+          price: 70,
+          badge: null
+        },
+        {
+          id: 'white-sauce-cheese',
+          name: 'Extra Cheese',
+          desc: 'Double the cheese, double the joy. Loaded with melted mozzarella on top.',
+          price: 90,
+          badge: 'Popular'
+        },
+        {
+          id: 'white-sauce-spicy',
+          name: 'Spicy Red Fusion',
+          desc: 'White sauce meets our fiery red chilli blend. Creamy with a kick.',
+          price: 80,
+          badge: null
+        }
+      ]
+    },
+
+    /* ── CHOWMEIN ── */
+    'chowmein': {
+      title: 'Chowmein',
+      subtitle: 'Wok-tossed hakka noodles',
+      image: 'images/menu/chowmein.png',
+      varieties: [
+        {
+          id: 'chowmein-veg',
+          name: 'Veg Chowmein',
+          desc: 'Classic hakka noodles stir-fried with fresh vegetables and soy sauce.',
+          price: 60,
+          badge: null
+        },
+        {
+          id: 'chowmein-paneer',
+          name: 'Paneer Chowmein',
+          desc: 'Soft paneer cubes tossed with noodles in our special spice blend.',
+          price: 80,
+          badge: 'Popular'
+        },
+        {
+          id: 'chowmein-special',
+          name: 'Veer Ji Special',
+          desc: 'Our signature chowmein with extra veggies, paneer, and secret masala.',
+          price: 100,
+          badge: 'Chef\'s Special'
+        }
+      ]
+    },
+
+    /* ── MOMOS ── */
+    'momos': {
+      title: 'Momos',
+      subtitle: 'Hand-folded steamed dumplings',
+      image: 'images/menu/momos.png',
+      varieties: [
+        {
+          id: 'momos-steamed',
+          name: 'Steamed Momos',
+          desc: 'Soft, juicy steamed dumplings with spiced veg filling. Served with red chutney.',
+          price: 50,
+          badge: null
+        },
+        {
+          id: 'momos-fried',
+          name: 'Fried Momos',
+          desc: 'Crispy golden-fried momos with a crunchy shell and juicy filling inside.',
+          price: 60,
+          badge: 'Popular'
+        },
+        {
+          id: 'momos-tandoori',
+          name: 'Tandoori Momos',
+          desc: 'Smoky tandoor-style momos with spiced coating. A premium street experience.',
+          price: 80,
+          badge: 'New'
+        }
+      ]
+    },
+
+    /* ── BURGER ── */
+    'burger': {
+      title: 'Burger',
+      subtitle: 'Loaded, grilled & crispy',
+      image: 'images/menu/burger.png',
+      varieties: [
+        {
+          id: 'burger-veg',
+          name: 'Veg Burger',
+          desc: 'Fresh veggie patty with crisp lettuce, tomato, and our smoky sauce.',
+          price: 70,
+          badge: null
+        },
+        {
+          id: 'burger-aloo',
+          name: 'Aloo Tikki Burger',
+          desc: 'Spiced potato tikki patty with tangy chutney and fresh salad.',
+          price: 80,
+          badge: 'Popular'
+        },
+        {
+          id: 'burger-cheese',
+          name: 'Cheese Burst',
+          desc: 'Double cheese melted into every bite with our signature sauce.',
+          price: 90,
+          badge: 'Best Seller'
+        }
+      ]
+    },
+
+    /* ── CHILLI POTATO ── */
+    'chilli-potato': {
+      title: 'Chilli Potato',
+      subtitle: 'Fiery, crispy & addictive',
+      image: 'images/menu/chilli-potato.png',
+      varieties: [
+        {
+          id: 'chilli-regular',
+          name: 'Regular Chilli',
+          desc: 'Crispy potato fingers in tangy chilli sauce with bell peppers.',
+          price: 70,
+          badge: null
+        },
+        {
+          id: 'chilli-extra-spicy',
+          name: 'Extra Spicy',
+          desc: 'For the brave! Double chilli, green chillies and fiery sauce.',
+          price: 70,
+          badge: '🔥 Spicy'
+        },
+        {
+          id: 'chilli-honey',
+          name: 'Honey Glazed',
+          desc: 'Sweet and spicy honey glaze with sesame topping. Perfectly balanced.',
+          price: 80,
+          badge: 'Popular'
+        }
+      ]
+    },
+
+    /* ── MANCHURIAN ── */
+    'manchurian': {
+      title: 'Manchurian',
+      subtitle: 'Indo-Chinese perfection',
+      image: 'images/menu/manchurian.png',
+      varieties: [
+        {
+          id: 'manchurian-dry',
+          name: 'Dry Manchurian',
+          desc: 'Crispy fried balls tossed dry in soy-ginger-garlic masala.',
+          price: 80,
+          badge: null
+        },
+        {
+          id: 'manchurian-gravy',
+          name: 'Gravy Manchurian',
+          desc: 'Rich, thick manchurian gravy poured over crispy veg balls.',
+          price: 90,
+          badge: 'Popular'
+        },
+        {
+          id: 'manchurian-combo',
+          name: 'Manchurian + Rice',
+          desc: 'Gravy manchurian served with steaming fried rice. Full meal deal.',
+          price: 120,
+          badge: 'Combo'
+        }
+      ]
+    },
+
+    /* ── SPRING ROLL ── */
+    'spring-roll': {
+      title: 'Spring Roll',
+      subtitle: 'Golden, crispy & crunchy',
+      image: 'images/menu/spring-roll.png',
+      varieties: [
+        {
+          id: 'spring-veg',
+          name: 'Veg Spring Roll',
+          desc: 'Classic crispy rolls stuffed with seasoned shredded vegetables.',
+          price: 60,
+          badge: null
+        },
+        {
+          id: 'spring-cheese',
+          name: 'Cheese Spring Roll',
+          desc: 'Golden rolls with melted cheese and veggie filling inside.',
+          price: 70,
+          badge: 'Popular'
+        },
+        {
+          id: 'spring-masala',
+          name: 'Masala Spring Roll',
+          desc: 'Spiced Indian masala filling inside crispy golden rolls.',
+          price: 70,
+          badge: null
+        }
+      ]
+    },
+
+    /* ── MACARONI ── */
+    'macaroni': {
+      title: 'Macaroni',
+      subtitle: 'Creamy, cheesy & comforting',
+      image: 'images/menu/macaroni.png',
+      varieties: [
+        {
+          id: 'macaroni-regular',
+          name: 'Regular Macaroni',
+          desc: 'Creamy Indian-style masala macaroni with fresh vegetables.',
+          price: 60,
+          badge: null
+        },
+        {
+          id: 'macaroni-cheese',
+          name: 'Extra Cheese',
+          desc: 'Loaded with double mozzarella and parmesan. Kids absolute favourite.',
+          price: 80,
+          badge: 'Kids Fav'
+        },
+        {
+          id: 'macaroni-spicy',
+          name: 'Spicy Masala',
+          desc: 'Bold Indian spices blended into creamy sauce. Comfort with a kick.',
+          price: 70,
+          badge: null
+        }
+      ]
+    },
+
+    /* ── CHOLE BHATURE ── */
+    'chole-bhature': {
+      title: 'Chole Bhature',
+      subtitle: 'The street food royalty',
+      image: 'images/menu/chole-bhature.png',
+      varieties: [
+        {
+          id: 'chole-regular',
+          name: 'Regular Chole Bhature',
+          desc: 'Classic fluffy bhatura with rich spiced chickpea curry. Timeless.',
+          price: 80,
+          badge: null
+        },
+        {
+          id: 'chole-double',
+          name: 'Double Bhature',
+          desc: 'Two golden bhaturas with extra chole. For the hungry soul.',
+          price: 120,
+          badge: 'Value Deal'
+        },
+        {
+          id: 'chole-special',
+          name: 'Veer Ji Special',
+          desc: 'Premium chole with secret masala, pickle and onion salad on side.',
+          price: 100,
+          badge: 'Chef\'s Special'
+        }
+      ]
+    }
+  };
+
+
+  /* ──────────────────────────────────────────
+     CART FUNCTIONS — uses sessionStorage
+     Cart clears automatically on page refresh
+     ────────────────────────────────────────── */
+  function getCart() {
+    try {
+      return JSON.parse(sessionStorage.getItem('veerji_cart') || '[]');
+    } catch { return []; }
+  }
+
+  function saveCart(cart) {
+    sessionStorage.setItem('veerji_cart', JSON.stringify(cart));
+  }
+
+  function addToCart(variety, itemTitle, price) {
+    const cart = getCart();
+    // Check if already in cart
+    const exists = cart.find(c => c.id === variety.id);
+    if (!exists) {
+      cart.push({
+        id: variety.id,
+        name: variety.name,
+        parent: itemTitle,
+        price: price,
+        qty: 1
+      });
+      saveCart(cart);
+    }
+    updateCartBadge();
+  }
+
+  function isInCart(id) {
+    return getCart().some(c => c.id === id);
+  }
+
+  function getCartCount() {
+    return getCart().length;
+  }
+
+  function updateCartBadge() {
+    const count = getCartCount();
+    const badge = document.getElementById('cart-badge');
+    if (badge) {
+      badge.textContent = count;
+      badge.classList.toggle('visible', count > 0);
+    }
+  }
+
+
+  /* ──────────────────────────────────────────
+     TOAST NOTIFICATION
+     ────────────────────────────────────────── */
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    const msgEl = document.getElementById('toast-msg');
+    if (!toast || !msgEl) return;
+    msgEl.innerHTML = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+
+  /* ──────────────────────────────────────────
+     BUILD THE PAGE
+     Reads ?item= from URL, finds data, renders cards
+     ────────────────────────────────────────── */
+  function buildPage() {
+    // Get item key from URL: varieties.html?item=chowmein
+    const params = new URLSearchParams(window.location.search);
+    const itemKey = params.get('item') || 'chowmein';
+
+    const data = MENU_DATA[itemKey];
+
+    // If item not found, show error
+    if (!data) {
+      document.getElementById('page-title').textContent = 'Item Not Found';
+      document.getElementById('varieties-grid').innerHTML =
+        '<p style="text-align:center;color:rgba(255,255,255,0.4);padding:3rem;">No varieties found. <a href="index.html" style="color:#D4A853">Go Home</a></p>';
+      return;
+    }
+
+    // Set page title
+    document.title = `${data.title} Varieties — Veer Ji Fast Food`;
+    document.getElementById('page-title').textContent = data.title;
+    document.getElementById('page-subtitle').textContent = data.subtitle;
+
+    // Build variety cards
+    const grid = document.getElementById('varieties-grid');
+    grid.innerHTML = data.varieties.map(v => {
+      const inCart = isInCart(v.id);
+      return `
+        <div class="variety-card" id="card-${v.id}">
+          <div class="card-img-wrap">
+            ${v.badge ? `<div class="card-badge">${v.badge}</div>` : ''}
+            <img
+              src="${data.image}"
+              alt="${v.name}"
+              class="card-img"
+              onerror="this.style.opacity='0.3'"
+            >
+          </div>
+          <div class="card-body">
+            <div class="card-name">${v.name}</div>
+            <div class="card-desc">${v.desc}</div>
+            <div class="card-price">₹${v.price}</div>
+            <button
+              class="card-btn ${inCart ? 'in-cart' : 'add'}"
+              id="btn-${v.id}"
+              onclick="handleCartBtn('${v.id}', '${v.name}', '${data.title}', ${v.price})"
+            >
+              ${inCart ? '✓ Go to Cart' : '+ Add to Cart'}
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    updateCartBadge();
+  }
+
+
+  /* ──────────────────────────────────────────
+     HANDLE ADD TO CART / GO TO CART CLICK
+     ────────────────────────────────────────── */
+  function handleCartBtn(id, name, parent, price) {
+    if (isInCart(id)) {
+      // Already in cart → go to cart page
+      window.location.href = 'cart.html';
+    } else {
+      // Add to cart
+      addToCart({ id, name }, parent, price);
+
+      // Update button
+      const btn = document.getElementById(`btn-${id}`);
+      if (btn) {
+        btn.textContent = '✓ Go to Cart';
+        btn.classList.remove('add');
+        btn.classList.add('in-cart');
+      }
+
+      showToast(`<span>${name}</span> added to cart! 🛒`);
+      updateCartBadge();
+    }
+  }
+
+
+  // Run on load
+  buildPage();
+  </script>
+
+</body>
+</html>
