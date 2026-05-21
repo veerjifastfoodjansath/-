@@ -400,27 +400,23 @@
       <p class="drinks-subtitle">Slide to choose your drink</p>
     </div>
 
-    <!-- Central glass display -->
+   <!-- Central bottle display -->
     <div class="glass-stage">
-      <div class="glass-wrap">
-        <div class="glass-body">
-          <div class="glass-rim"></div>
-          <!-- Liquid color changes on drink select -->
-          <div class="glass-liquid" id="glass-liquid">
-            <div class="bubble b1"></div>
-            <div class="bubble b2"></div>
-            <div class="bubble b3"></div>
-            <div class="bubble b4"></div>
-            <div class="liquid-surface"></div>
-          </div>
-          <div class="ice i1"></div>
-          <div class="ice i2"></div>
-          <div class="ice i3"></div>
-          <div class="glass-shine"></div>
-          <div class="glass-cond c1"></div>
-          <div class="glass-cond c2"></div>
-        </div>
+      <div class="bottle-display">
+        <img
+          id="active-bottle-img"
+          src="images/drinks/pepsi.png"
+          alt="Selected Drink"
+          style="height:200px; object-fit:contain;
+                 filter:drop-shadow(0 20px 50px rgba(0,0,0,0.7));
+                 animation:foodFloat 4s ease-in-out infinite;
+                 transition:opacity 0.3s ease, transform 0.3s ease;"
+          onerror="this.style.display='none'"
+        >
       </div>
+      <p class="glass-drink-name" id="glass-drink-name">Pepsi</p>
+      <p class="glass-drink-sub">Chilled & Fresh — ₹20</p>
+    </div>
       <!-- Current drink name below glass -->
       <p class="glass-drink-name" id="glass-drink-name">Pepsi</p>
       <p class="glass-drink-sub">Chilled & Fresh — ₹20</p>
