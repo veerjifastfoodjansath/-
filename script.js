@@ -8,24 +8,20 @@ document.addEventListener('DOMContentLoaded', () => {
      PART 1: SPLASH SCREEN
      Shows for 2s then fades out with scale effect
      ────────────────────────────────────────────── */
- const splash = document.getElementById('splash-screen');
-
-  // Lock scroll + force page to top immediately
-  document.body.style.overflow = 'hidden';
-  window.scrollTo(0, 0);
+  const splash = document.getElementById('splash-screen');
 
   if (splash) {
+    // Wait 2 seconds then fade out
     setTimeout(() => {
       splash.classList.add('fade-out');
-
-      // Force remove after 1s regardless of transitionend
-      setTimeout(() => {
-        splash.style.display = 'none';
-        document.body.style.overflow = '';
-      }, 1000);
-
     }, 2000);
+
+    // Remove from DOM after transition ends
+    splash.addEventListener('transitionend', () => {
+      splash.style.display = 'none';
+    });
   }
+
 
   /* ──────────────────────────────────────────────
      PART 2: VIDEO HERO
@@ -36,8 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const scrollHint = document.getElementById('scroll-hint');
 
   if (heroVideo) {
-    // Force visible immediately
-    heroVideo.style.opacity = '1';
+    // Show video once loaded
+    heroVideo.addEventListener('loadeddata', () => {
+      heroVideo.classList.add('loaded');
     });
 
     // After video ends (plays once), show hero text + scroll hint
@@ -181,19 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const drinkName = slide.dataset.drinkName;
     const drinkPrice = slide.dataset.drinkPrice;
 
-   // Update centre bottle image
-    const bottleImg = document.getElementById('active-bottle-img');
-    if (bottleImg) {
-      bottleImg.style.opacity = '0';
-      bottleImg.style.transform = 'scale(0.85)';
-      setTimeout(() => {
-        const newSrc = slide.querySelector('img')?.src;
-        if (newSrc) bottleImg.src = newSrc;
-        bottleImg.style.opacity = '1';
-        bottleImg.style.transform = 'scale(1)';
-      }, 200);
-    }
-
     // Drain liquid first then refill with new color
     if (glassLiquid) {
       glassLiquid.style.height = '5%';
@@ -323,4 +307,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-}); // THIS IS THE CLOSING BRACKET THAT WAS MISSING!
+});
