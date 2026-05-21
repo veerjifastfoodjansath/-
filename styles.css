@@ -1060,3 +1060,9 @@ body {
   .menu-dots { right: 1rem; }
   .nav-order-btn { font-size: 0.75rem; padding: 8px 16px; }
 }
+
+/* Fix for overlapping overlay capturing clicks */
+#drink-add-btn {
+  position: relative;
+  z-index: 10;
+}
