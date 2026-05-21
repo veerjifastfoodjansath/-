@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
+  <style> 
     /* ============================================================
        CART PAGE — CSS (Same theme as your existing design)
        ============================================================ */
@@ -391,10 +391,81 @@
       cursor: pointer;
     }
     .map-link:hover { color: var(--gold-light); }
+
+    /* ── UPSELL DRINKS SLIDER (CART PAGE) ── */
+    .upsell-section {
+      max-width: 600px;
+      margin: 1rem auto 4rem;
+      padding: 0 1.2rem;
+    }
+    .upsell-header h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+    .drinks-slider {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 10px;
+      scrollbar-width: none; /* Firefox */
+    }
+    .drinks-slider::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+    
+    .drink-slide {
+      scroll-snap-align: center;
+      flex-shrink: 0;
+      width: 105px;
+      background: var(--dark-3);
+      border: 1px solid rgba(212,168,83,0.15);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 8px;
+      transition: transform 0.3s ease;
+    }
+    .drink-slide img {
+      width: 45px;
+      height: 65px;
+      object-fit: contain;
+      margin-bottom: 8px;
+    }
+    .drink-name {
+      font-size: 0.75rem;
+      color: var(--white);
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 2px;
+    }
+    .drink-price {
+      font-size: 0.75rem;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .slide-add-btn {
+      background: var(--gold);
+      color: #111;
+      border: none;
+      padding: 8px 0;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+    .slide-add-btn:hover { background: var(--gold-light); transform: scale(1.05); }
+    .slide-add-btn.added { background: var(--green); color: white; }
+
   </style>
 </head>
 <body>
-
   <!-- ============================================================
        TOP NAVIGATION
        ============================================================ -->
@@ -412,6 +483,65 @@
 
   <!-- Cart content -->
   <div class="cart-wrap" id="cart-wrap"></div>
+  <div class="cart-wrap" id="cart-wrap"></div>
+
+  <div class="upsell-section" id="upsell-section">
+    <div class="upsell-header">
+      <h3>Add a refreshing drink? 🥤</h3>
+    </div>
+    
+    <div class="drinks-slider">
+      <div class="drink-slide">
+        <img src="images/drinks/pepsi.png" alt="Pepsi" onerror="this.style.display='none'">
+        <span class="drink-name">Pepsi</span>
+        <span class="drink-price">₹20</span>
+        <button class="slide-add-btn" onclick="addDrinkFromCart(this, 'Pepsi', 20)">Add +</button>
+      </div>
+      
+      <div class="drink-slide">
+        <img src="images/drinks/fanta.png" alt="Fanta" onerror="this.style.display='none'">
+        <span class="drink-name">Fanta</span>
+        <span class="drink-price">₹20</span>
+        <button class="slide-add-btn" onclick="addDrinkFromCart(this, 'Fanta', 20)">Add +</button>
+      </div>
+
+      <div class="drink-slide">
+        <img src="images/drinks/campa-orange.png" alt="Campa-Fanta" onerror="this.style.display='none'">
+        <span class="drink-name">Campa-Fanta</span>
+        <span class="drink-price">₹20</span>
+        <button class="slide-add-btn" onclick="addDrinkFromCart(this, 'Campa-Fanta', 20)">Add +</button>
+      </div>
+
+
+      <div class="drink-slide">
+        <img src="images/drinks/campa-cola.png" alt="Campa-cola" onerror="this.style.display='none'">
+        <span class="drink-name">Campa-cola</span>
+        <span class="drink-price">₹20</span>
+        <button class="slide-add-btn" onclick="addDrinkFromCart(this, 'Campa-cola', 20)">Add +</button>
+      </div>
+
+      <div class="drink-slide">
+        <img src="images/drinks/mountain.png" alt="Mountain Dew" onerror="this.style.display='none'">
+        <span class="drink-name">Mountain Dew</span>
+        <span class="drink-price">₹20</span>
+        <button class="slide-add-btn" onclick="addDrinkFromCart(this,'Mountain Dew', 20)">Add +</button>
+      </div>
+      
+      <div class="drink-slide">
+        <img src="images/drinks/sprite.png" alt="Sprite" onerror="this.style.display='none'">
+        <span class="drink-name">Sprite</span>
+        <span class="drink-price">₹20</span>
+        <button class="slide-add-btn" onclick="addDrinkFromCart(this, 'Sprite', 20)">Add +</button>
+      </div>
+
+      <div class="drink-slide">
+        <img src="images/drinks/thumbsup.png" alt="Thumbs Up" onerror="this.style.display='none'">
+        <span class="drink-name">Thumbs Up</span>
+        <span class="drink-price">₹20</span>
+        <button class="slide-add-btn" onclick="addDrinkFromCart(this, 'Thumbs Up', 20)">Add +</button>
+      </div>
+    </div>
+  </div>
 
 
   <script>
@@ -733,6 +863,42 @@
 
   // Initial render
   renderCart();
+
+  /* ── UPSELL SLIDER LOGIC ── */
+  function addDrinkFromCart(btnElement, drinkName, drinkPrice) {
+    // Prevent double clicking
+    if (btnElement.classList.contains('added')) return;
+
+    // 1. Generate ID and fetch current cart
+    const itemID = 'drink-' + drinkName.toLowerCase().replace(/\s+/g, '-');
+    let cart = getCart();
+
+    // 2. Add drink or increase quantity
+    const existingItem = cart.find(item => item.id === itemID);
+    if (existingItem) {
+      existingItem.qty += 1;
+    } else {
+      cart.push({ id: itemID, name: drinkName, price: drinkPrice, parent: 'Cold Drinks', qty: 1 });
+    }
+
+    // 3. Save to backpack
+    saveCart(cart);
+    
+    // 4. THIS IS THE MAGIC: Re-render the cart instantly!
+    renderCart(); 
+
+    // 5. Button visual feedback
+    const originalText = btnElement.innerHTML;
+    btnElement.classList.add('added');
+    btnElement.innerHTML = 'Added ✓';
+
+    // Reset button after 2 seconds
+    setTimeout(() => {
+      btnElement.classList.remove('added');
+      btnElement.innerHTML = originalText;
+    }, 2000);
+  }
+  
   </script>
 
 </body>
