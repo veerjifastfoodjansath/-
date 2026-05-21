@@ -1113,3 +1113,48 @@ body {
     font-size: 0.85rem;
   }
 }
+
+
+/* ============================================================
+   GLOBAL BOOKING BUTTON (Top Center)
+   ============================================================ */
+.global-book-btn {
+  position: fixed !important;
+  top: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important; /* This pulls it perfectly to the center */
+  z-index: 99999 !important; 
+  
+  background: var(--dark-3);
+  color: var(--gold);
+  border: 1px solid rgba(212,168,83,0.4);
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6), 0 0 15px rgba(212,168,83,0.15);
+  transition: all 0.3s ease;
+  white-space: nowrap; /* Prevents text from breaking into two lines */
+}
+
+.global-book-btn:hover {
+  background: rgba(212,168,83,0.15);
+  border-color: var(--gold);
+  color: var(--gold-light);
+  /* When scaling a centered element, you MUST keep the translateX(-50%) */
+  transform: translateX(-50%) scale(1.05) !important; 
+}
+
+/* Mobile Adjustment so it doesn't bump into your cart icon */
+@media (max-width: 600px) {
+  .global-book-btn {
+    top: 15px !important;
+    padding: 8px 16px;
+    font-size: 0.75rem;
+  }
+}
