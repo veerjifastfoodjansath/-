@@ -15,6 +15,9 @@
 </head>
 
 <body>
+  <a href="cart.html" class="global-floating-cart">
+  🛒 <span id="main-cart-counter">0</span>
+</a>
 
   <!-- ============================================================
        PART 1: SPLASH SCREEN — "Welcome Ji"
@@ -136,7 +139,7 @@
           <p class="item-desc">Rich, creamy white sauce pasta cooked with fresh vegetables and our secret spice blend. Irresistibly cheesy in every bite.</p>
           <!-- CHANGE PASTA PRICE HERE -->
           <span class="item-price">₹70 onwards</span>
-          <a href="#" class="item-btn">Explore Varieties</a>
+          <a href="WHITE-SAUCE-PASTA.html" class="item-btn">Explore Varieties</a>
         </div>
       </div>
 
@@ -163,7 +166,7 @@
           </div>
           <p class="item-desc">Stir-fried hakka noodles tossed with fresh vegetables, soy sauce, and our secret spice blend. A street food classic reinvented.</p>
           <span class="item-price">₹60 onwards</span>
-          <a href="#" class="item-btn">Explore Varieties</a>
+          <a href="CHOWMEIN.html" class="item-btn">Explore Varieties</a>
         </div>
       </div>
 
@@ -190,7 +193,7 @@
           </div>
           <p class="item-desc">Hand-folded steamed dumplings bursting with spiced filling, served with our fiery house-made red chutney. Soft, juicy and addictive.</p>
           <span class="item-price">₹50 onwards</span>
-          <a href="#" class="item-btn">Explore Varieties</a>
+          <a href="MOMOS.html" class="item-btn">Explore Varieties</a>
         </div>
       </div>
 
@@ -216,7 +219,7 @@
           </div>
           <p class="item-desc">Double-stacked loaded burger with melted cheese, crisp lettuce, fresh tomato and our signature smoky sauce between toasted sesame buns.</p>
           <span class="item-price">₹70 onwards</span>
-          <a href="#" class="item-btn">Explore Varieties</a>
+          <a href="BURGER.html" class="item-btn">Explore Varieties</a>
         </div>
       </div>
 
@@ -242,7 +245,7 @@
           </div>
           <p class="item-desc">Crispy golden potato fingers tossed in a fiery tangy sauce with colourful bell peppers, green chillies and fresh spring onions.</p>
           <span class="item-price">₹70 onwards</span>
-          <a href="#" class="item-btn">Explore Varieties</a>
+          <a href="CHILLI-POTATO.html" class="item-btn">Explore Varieties</a>
         </div>
       </div>
 
@@ -269,7 +272,7 @@
           </div>
           <p class="item-desc">Crispy fried vegetable balls smothered in a rich savory manchurian gravy with soy, ginger, and garlic. Indo-Chinese perfection.</p>
           <span class="item-price">₹80 onwards</span>
-          <a href="#" class="item-btn">Explore Varieties</a>
+          <a href="MANCHURIAN.html" class="item-btn">Explore Varieties</a>
         </div>
       </div>
 
@@ -295,7 +298,7 @@
           </div>
           <p class="item-desc">Crunchy golden rolls stuffed with seasoned shredded vegetables, deep-fried to crispy perfection, served with sweet chilli dipping sauce.</p>
           <span class="item-price">₹60 onwards</span>
-          <a href="#" class="item-btn">Explore Varieties</a>
+          <a href="SPRING-ROLL.html" class="item-btn">Explore Varieties</a>
         </div>
       </div>
 
@@ -322,7 +325,7 @@
           </div>
           <p class="item-desc">Creamy Indian-style masala macaroni loaded with cheese, vegetables, and our special spice twist. A warm comforting favourite for all ages.</p>
           <span class="item-price">₹60 onwards</span>
-          <a href="#" class="item-btn">Explore Varieties</a>
+          <a href="MACARONI.html" class="item-btn">Explore Varieties</a>
         </div>
       </div>
 
@@ -348,7 +351,7 @@
           </div>
           <p class="item-desc">Fluffy golden-fried bhatura paired with rich spiced chickpea curry. The ultimate North Indian feast that defines street food royalty.</p>
           <span class="item-price">₹80 onwards</span>
-          <a href="#" class="item-btn">Explore Varieties</a>
+          <a href="CHOLE-BHATURE.html" class="item-btn">Explore Varieties</a>
         </div>
       </div>
 
@@ -419,6 +422,9 @@
       <!-- Current drink name below glass -->
       <p class="glass-drink-name" id="glass-drink-name">Pepsi</p>
       <p class="glass-drink-sub">Chilled & Fresh — ₹20</p>
+    <button id="drink-add-btn" class="item-btn" style="margin-top: 1rem; width: 100%; max-width: 200px; justify-content: center;" onclick="addCurrentDrinkToCart(this)">
+        Add to Cart +
+      </button>
     </div>
 
     <!-- Horizontally sliding drink bottles -->
