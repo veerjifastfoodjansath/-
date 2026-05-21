@@ -5,60 +5,71 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ──────────────────────────────────────────────
-     FORCE PAGE TO LOAD FROM TOP
+     FORCE PAGE TO LOAD FROM TOP (HERO SECTION)
      ────────────────────────────────────────────── */
+  // Reset scroll position to absolute top
   window.scrollTo(0, 0);
   document.documentElement.scrollTop = 0;
   document.body.scrollTop = 0;
-  requestAnimationFrame(() => { window.scrollTo(0, 0); });
-
+  
+  // Also use requestAnimationFrame to ensure it works
+  requestAnimationFrame(() => {
+    window.scrollTo(0, 0);
+  });
 
   /* ──────────────────────────────────────────────
      PART 1: SPLASH SCREEN
-     Shows for 2s then fades out
+     Shows for 2s then fades out with scale effect
      ────────────────────────────────────────────── */
   const splash = document.getElementById('splash-screen');
+
+  // Lock scroll + force page to top immediately
   document.body.style.overflow = 'hidden';
   window.scrollTo(0, 0);
 
   if (splash) {
     setTimeout(() => {
       splash.classList.add('fade-out');
+
+      // Force remove after 1s regardless of transitionend
       setTimeout(() => {
         splash.style.display = 'none';
         document.body.style.overflow = '';
+        // Ensure scroll is still at top after splash ends
         window.scrollTo(0, 0);
       }, 1000);
+
     }, 2000);
   }
 
 
-  /* ──────────────────────────────────────────────
+ /* ──────────────────────────────────────────────
      PART 2: VIDEO HERO
-     Video plays once → text fades in → scroll hint
+     Video plays once, text appears on top, video visible
      ────────────────────────────────────────────── */
   const heroVideo = document.getElementById('hero-video');
   const heroContent = document.getElementById('hero-content');
   const scrollHint = document.getElementById('scroll-hint');
 
   if (heroVideo) {
+    // Force video visible immediately
     heroVideo.style.opacity = '1';
     heroVideo.style.display = 'block';
-    heroVideo.loop = false;
-    heroVideo.muted = false; // mute/unmute from here
+    heroVideo.loop = false; // Play only once
+    heroVideo.muted = true;
     heroVideo.playsInline = true;
 
-    // Wait for splash to finish before playing video
+    // WAIT 2 SECONDS FOR SPLASH SCREEN TO FADE BEFORE DROPPING BURGER
     setTimeout(() => {
       const playPromise = heroVideo.play();
       if (playPromise !== undefined) {
-       playPromise.catch(error => {
+        playPromise.catch(error => {
           console.log('Video autoplay failed:', error);
         });
       }
     }, 2000);
 
-    // After video ends → show headline + button
+    // After video ends (plays once), freeze on last frame and show text
     heroVideo.addEventListener('ended', () => {
       heroVideo.pause();
       if (heroContent) heroContent.classList.add('visible');
@@ -67,51 +78,59 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 1000);
     });
 
-    // Fallback: show content after 8s if video never ends
+    // Fallback: if video takes too long to load, ensure content is visible
     setTimeout(() => {
       if (heroContent && !heroContent.classList.contains('visible')) {
         heroContent.classList.add('visible');
-        if (scrollHint) scrollHint.classList.add('show');
       }
-    }, 8000);  //if not work then change to 4000 from 8000
-
+      if (scrollHint && !scrollHint.classList.contains('show')) {
+        scrollHint.classList.add('show');
+      }
+    }, 4000);
   } else {
+    // No video — show content immediately
     if (heroContent) heroContent.classList.add('visible');
     if (scrollHint) setTimeout(() => scrollHint.classList.add('show'), 800);
   }
 
-
   /* ──────────────────────────────────────────────
-     PART 3: MENU SECTION — Scroll-triggered reveal
-     Background fixed, each item activates on scroll
+     PART 3: MENU SECTION — Scroll-triggered item reveal
+     Background stays fixed, each item activates on scroll
      ────────────────────────────────────────────── */
   const menuSection = document.getElementById('menu-section');
   const menuItems = document.querySelectorAll('.menu-item');
   const menuDots = document.querySelectorAll('.dot');
   const currentItemEl = document.getElementById('current-item');
 
-// Track which menu item is currently visible
-
+  // Track which menu item is currently visible
   let activeMenuIndex = 0;
 
-// IntersectionObserver for each menu item
-
+  // IntersectionObserver for each menu item
   const menuItemObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const idx = parseInt(entry.target.dataset.index);
+
+        // Remove active from all items
         menuItems.forEach(item => item.classList.remove('active'));
         menuDots.forEach(dot => dot.classList.remove('active'));
+
+        // Set active on current
         entry.target.classList.add('active');
         if (menuDots[idx]) menuDots[idx].classList.add('active');
         if (currentItemEl) currentItemEl.textContent = idx + 1;
+
         activeMenuIndex = idx;
       }
     });
-  }, { threshold: 0.5, rootMargin: '0px 0px -20% 0px' });
+  }, {
+    threshold: 0.5,
+    rootMargin: '0px 0px -20% 0px'
+  });
 
   menuItems.forEach(item => menuItemObserver.observe(item));
 
+  // Show/hide menu section nav dots based on section visibility
   const menuSectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -124,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (menuSection) menuSectionObserver.observe(menuSection);
 
+  // Dot click → scroll to that menu item
   menuDots.forEach(dot => {
     dot.addEventListener('click', () => {
       const targetIdx = parseInt(dot.dataset.target);
@@ -133,10 +153,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Mouse parallax on food photos (desktop only)
+  // Mouse parallax on food photos
   menuItems.forEach(item => {
     const img = item.querySelector('.food-photo');
     if (!img) return;
+
     item.addEventListener('mousemove', (e) => {
       if (window.innerWidth < 768) return;
       const rect = item.getBoundingClientRect();
@@ -144,39 +165,25 @@ document.addEventListener('DOMContentLoaded', () => {
       const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
       img.style.transform = `translate(${x * 18}px, ${y * 12}px) rotate(${x * 1.5}deg) scale(1.03)`;
     });
-    item.addEventListener('mouseleave', () => { img.style.transform = ''; });
-  });
 
-
-  /* ──────────────────────────────────────────────
-     EXPLORE VARIETIES BUTTONS
-     Each button goes to varieties.html?item=X
-     Item key from data-item on parent .menu-item div
-     ────────────────────────────────────────────── */
-  document.querySelectorAll('.item-btn').forEach(btn => {
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      const menuItem = this.closest('.menu-item');
-      const itemKey = menuItem ? menuItem.dataset.item : null;
-      if (itemKey) {
-        window.location.href = `varieties.html?item=${itemKey}`;
-      }
+    item.addEventListener('mouseleave', () => {
+      img.style.transform = '';
     });
   });
 
 
   /* ──────────────────────────────────────────────
-     PART 4: COLD DRINK BAR
-     Click bottle → bottle image swaps + name updates
+     PART 4: COLD DRINK BAR — Horizontal slider + glass color change
+     Kumo-style: click a bottle → glass liquid morphs
      ────────────────────────────────────────────── */
   const drinkSlides = document.querySelectorAll('.drink-slide');
+  const glassLiquid = document.getElementById('glass-liquid');
   const glassDrinkName = document.getElementById('glass-drink-name');
   const glassSubEl = document.querySelector('.glass-drink-sub');
   const drinksSlider = document.getElementById('drinks-slider');
   const sliderPrev = document.getElementById('slider-prev');
   const sliderNext = document.getElementById('slider-next');
   const drinkDots = document.querySelectorAll('.ddot');
-  const glassLiquid = document.getElementById('glass-liquid');
 
   let currentDrinkIndex = 0;
 
@@ -184,17 +191,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const slide = drinkSlides[index];
     if (!slide) return;
 
+    // Remove active from all
     drinkSlides.forEach(s => s.classList.remove('active'));
     drinkDots.forEach(d => d.classList.remove('active'));
+
+    // Set active
     slide.classList.add('active');
     if (drinkDots[index]) drinkDots[index].classList.add('active');
 
-    const drinkName = slide.dataset.drinkName;
-    const drinkPrice = slide.dataset.drinkPrice;
     const fromColor = slide.dataset.liquidFrom;
     const toColor = slide.dataset.liquidTo;
+    const drinkName = slide.dataset.drinkName;
+    const drinkPrice = slide.dataset.drinkPrice;
 
-    // Swap bottle image in centre display
+    // Update centre bottle image
     const bottleImg = document.getElementById('active-bottle-img');
     if (bottleImg) {
       bottleImg.style.opacity = '0';
@@ -207,13 +217,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 200);
     }
 
-    // Glass liquid color (if glass HTML still present)
+    // Drain liquid first then refill with new color
     if (glassLiquid) {
       glassLiquid.style.height = '5%';
+
       setTimeout(() => {
         glassLiquid.style.background = `linear-gradient(180deg, ${fromColor} 0%, ${toColor} 100%)`;
         glassLiquid.style.height = '70%';
-        glassLiquid.querySelectorAll('.bubble').forEach(b => {
+
+        // Restart bubble animations
+        const bubbles = glassLiquid.querySelectorAll('.bubble');
+        bubbles.forEach(b => {
           b.style.animation = 'none';
           void b.offsetHeight;
           b.style.animation = '';
@@ -221,56 +235,76 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 300);
     }
 
+    // Update name label
     if (glassDrinkName) glassDrinkName.textContent = drinkName;
     if (glassSubEl) glassSubEl.textContent = `Chilled & Fresh — ${drinkPrice}`;
 
+    // Scroll slide into view
     slide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
     currentDrinkIndex = index;
   }
 
+  // Click on drink slide
   drinkSlides.forEach((slide, index) => {
     slide.addEventListener('click', () => activateDrink(index));
   });
 
+  // Dot click
   drinkDots.forEach(dot => {
-    dot.addEventListener('click', () => activateDrink(parseInt(dot.dataset.di)));
+    dot.addEventListener('click', () => {
+      activateDrink(parseInt(dot.dataset.di));
+    });
   });
 
+  // Arrow navigation
   if (sliderPrev) {
     sliderPrev.addEventListener('click', () => {
-      activateDrink((currentDrinkIndex - 1 + drinkSlides.length) % drinkSlides.length);
+      const prev = (currentDrinkIndex - 1 + drinkSlides.length) % drinkSlides.length;
+      activateDrink(prev);
     });
   }
 
   if (sliderNext) {
     sliderNext.addEventListener('click', () => {
-      activateDrink((currentDrinkIndex + 1) % drinkSlides.length);
+      const next = (currentDrinkIndex + 1) % drinkSlides.length;
+      activateDrink(next);
     });
   }
 
-  // Touch swipe support
+  // Touch/swipe support for drink slider
   let touchStartX = 0;
+  let touchEndX = 0;
+
   if (drinksSlider) {
     drinksSlider.addEventListener('touchstart', e => {
       touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
+
     drinksSlider.addEventListener('touchend', e => {
-      const diff = touchStartX - e.changedTouches[0].screenX;
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+
       if (Math.abs(diff) > 50) {
-        activateDrink(diff > 0
-          ? (currentDrinkIndex + 1) % drinkSlides.length
-          : (currentDrinkIndex - 1 + drinkSlides.length) % drinkSlides.length
-        );
+        if (diff > 0) {
+          // Swiped left → next
+          activateDrink((currentDrinkIndex + 1) % drinkSlides.length);
+        } else {
+          // Swiped right → prev
+          activateDrink((currentDrinkIndex - 1 + drinkSlides.length) % drinkSlides.length);
+        }
       }
     }, { passive: true });
   }
 
+  // Initialize first drink
   activateDrink(0);
 
 
   /* ──────────────────────────────────────────────
      BACKGROUND LAYER MANAGEMENT
-     Kitchen BG shows only during menu section
+     Shows kitchen bg only when menu section is active,
+     hides it for hero and drinks sections
      ────────────────────────────────────────────── */
   const menuBg = document.querySelector('.menu-bg');
   const menuBgOverlay = document.querySelector('.menu-bg-overlay');
@@ -284,10 +318,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting && menuBg) {
-        const show = entry.target.id === 'menu-section';
-        menuBg.style.opacity = show ? '1' : '0';
-        if (menuBgOverlay) menuBgOverlay.style.opacity = show ? '1' : '0';
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        // Show kitchen bg only for menu section
+        if (menuBg) {
+          menuBg.style.opacity = id === 'menu-section' ? '1' : '0';
+          menuBgOverlay.style.opacity = id === 'menu-section' ? '1' : '0';
+        }
       }
     });
   }, { threshold: 0.3 });
@@ -297,6 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ──────────────────────────────────────────────
      SMOOTH ANCHOR SCROLLING
+     For "Explore Menu" CTA button
      ────────────────────────────────────────────── */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -306,34 +344,6 @@ document.addEventListener('DOMContentLoaded', () => {
         target.scrollIntoView({ behavior: 'smooth' });
       }
     });
-  });
-
-
-  /* ──────────────────────────────────────────────
-     CART BADGE ON MAIN PAGE
-     Shows count on sticky 🛒 button when items in cart
-     ────────────────────────────────────────────── */
-  function updateMainCartBadge() {
-    try {
-      const cart = JSON.parse(sessionStorage.getItem('veerji_cart') || '[]');
-      const count = cart.length;
-      const badge = document.getElementById('cart-count-badge');
-      const cartBtn = document.getElementById('cart-nav-btn');
-      if (badge) {
-        badge.textContent = count;
-        badge.style.display = count > 0 ? 'flex' : 'none';
-      }
-      if (cartBtn && count > 0) {
-        cartBtn.style.borderColor = '#D4A853';
-        cartBtn.style.color = '#D4A853';
-      }
-    } catch (e) {}
-  }
-
-  updateMainCartBadge();
-  window.addEventListener('focus', updateMainCartBadge);
-  document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) updateMainCartBadge();
   });
 
 });
