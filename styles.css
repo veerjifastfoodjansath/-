@@ -1158,3 +1158,89 @@ body {
     font-size: 0.75rem;
   }
 }
+
+
+
+/* ============================================================
+   WHATSAPP INQUIRY FORM
+   ============================================================ */
+.inquiry-section {
+  padding: 4rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  background: var(--dark-2); /* Blends smoothly into the footer */
+  position: relative;
+  z-index: 10;
+}
+
+.inquiry-box {
+  background: var(--dark-3);
+  border: 1px solid rgba(212,168,83,0.15);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+.inquiry-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.inquiry-sub {
+  font-size: 0.85rem;
+  color: rgba(245,242,236,0.6);
+  margin-bottom: 1.5rem;
+}
+
+#wa-inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#wa-inquiry-form input,
+#wa-inquiry-form textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+/* Gold glow when the user types */
+#wa-inquiry-form input:focus,
+#wa-inquiry-form textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: rgba(212,168,83,0.05);
+  box-shadow: 0 0 15px rgba(212,168,83,0.1);
+}
+
+.inq-submit-btn {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
+.inq-submit-btn:hover {
+  background: #1fbc58;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+}
