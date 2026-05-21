@@ -5,6 +5,19 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ──────────────────────────────────────────────
+     FORCE PAGE TO LOAD FROM TOP (HERO SECTION)
+     ────────────────────────────────────────────── */
+  // Reset scroll position to absolute top
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  
+  // Also use requestAnimationFrame to ensure it works
+  requestAnimationFrame(() => {
+    window.scrollTo(0, 0);
+  });
+
+  /* ──────────────────────────────────────────────
      PART 1: SPLASH SCREEN
      Shows for 2s then fades out with scale effect
      ────────────────────────────────────────────── */
@@ -22,6 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         splash.style.display = 'none';
         document.body.style.overflow = '';
+        // Ensure scroll is still at top after splash ends
+        window.scrollTo(0, 0);
       }, 1000);
 
     }, 2000);
@@ -39,14 +54,21 @@ document.addEventListener('DOMContentLoaded', () => {
   if (heroVideo) {
     // Force video visible immediately
     heroVideo.style.opacity = '1';
+    heroVideo.style.display = 'block';
     heroVideo.autoplay = true;
     heroVideo.loop = false; // Play only once
+    heroVideo.muted = true;
+    heroVideo.playsInline = true;
 
     // Try to play the video
     const playPromise = heroVideo.play();
     if (playPromise !== undefined) {
       playPromise.catch(error => {
         console.log('Video autoplay failed:', error);
+        // Even if video fails, show content
+        if (heroContent) {
+          heroContent.classList.add('visible');
+        }
       });
     }
 
@@ -64,9 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 1500);
     }
 
-    // After video ends (plays once), hide nothing - keep page as is
+    // After video ends (plays once), freeze on last frame
     heroVideo.addEventListener('ended', () => {
-      // Video freezes on last frame
       heroVideo.pause();
     });
 
