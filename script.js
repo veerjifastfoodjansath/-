@@ -191,6 +191,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const slide = drinkSlides[index];
     if (!slide) return;
 
+     // --- PASTE THIS NEW LINE RIGHT HERE ---
+    resetDrinkButton();
+
     // Remove active from all
     drinkSlides.forEach(s => s.classList.remove('active'));
     drinkDots.forEach(d => d.classList.remove('active'));
@@ -347,3 +350,63 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+
+/* ──────────────────────────────────────────────
+   MAIN PAGE: CENTRAL DRINK ADD TO CART
+   ────────────────────────────────────────────── */
+function addCurrentDrinkToCart(btnElement) {
+  // 1. If already added, act as a fast-travel to cart
+  if (btnElement.classList.contains('added-state')) {
+    window.location.href = 'cart.html';
+    return;
+  }
+
+  // 2. Read what drink is currently sitting in the center stage
+  const drinkName = document.getElementById('glass-drink-name').textContent.trim();
+  const priceText = document.querySelector('.glass-drink-sub').textContent;
+  
+  // Extract just the number from the price text (e.g., "₹20" becomes 20)
+  const drinkPrice = parseInt(priceText.match(/\d+/)[0], 10);
+  
+  // Create a clean ID for the cart
+  const itemID = 'drink-' + drinkName.toLowerCase().replace(/\s+/g, '-');
+
+  // 3. Open the sessionStorage backpack
+  let cart = JSON.parse(sessionStorage.getItem('veerji_cart') || '[]');
+  
+  // Check if it's already in the bag
+  const existingItem = cart.find(item => item.id === itemID);
+  if (existingItem) {
+    existingItem.qty += 1;
+  } else {
+    cart.push({ id: itemID, name: drinkName, price: drinkPrice, parent: 'Cold Drinks', qty: 1 });
+  }
+
+  // Save the bag
+  sessionStorage.setItem('veerji_cart', JSON.stringify(cart));
+  
+  // 4. Update the Button UI to look successful (Green)
+  btnElement.classList.add('added-state');
+  btnElement.style.background = '#25D366';
+  btnElement.style.borderColor = '#25D366';
+  btnElement.style.color = '#fff';
+  btnElement.innerHTML = 'Go to Cart 🛒';
+  
+  // 5. Update the global cart counter at the top of the page
+  if (typeof updateMainCartCounter === "function") {
+    updateMainCartCounter();
+  }
+}
+
+// This function resets the button back to normal when they slide to a new drink
+function resetDrinkButton() {
+  const drinkBtn = document.getElementById('drink-add-btn');
+  if (drinkBtn) {
+    drinkBtn.classList.remove('added-state');
+    drinkBtn.style.background = '';
+    drinkBtn.style.borderColor = '';
+    drinkBtn.style.color = '';
+    drinkBtn.innerHTML = 'Add to Cart +';
+  }
+}
