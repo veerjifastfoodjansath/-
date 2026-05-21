@@ -410,3 +410,62 @@ function resetDrinkButton() {
     drinkBtn.innerHTML = 'Add to Cart +';
   }
 }
+
+
+/* ============================================================
+   UNIVERSAL ADD TO CART ENGINE (For all menu pages)
+   ============================================================ */
+function addToCart(itemName, itemPrice, btnElement) {
+  // 1. Create a clean ID based on the item's name
+  const itemID = 'item-' + itemName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
+  // 2. Open the sessionStorage backpack
+  let cart = JSON.parse(sessionStorage.getItem('veerji_cart') || '[]');
+
+  // 3. Check if it is already in the cart
+  const existingItem = cart.find(item => item.id === itemID);
+  if (existingItem) {
+    existingItem.qty += 1;
+  } else {
+    // Add new item to the cart
+    cart.push({ 
+      id: itemID, 
+      name: itemName, 
+      price: itemPrice, 
+      parent: 'Menu Item', 
+      qty: 1 
+    });
+  }
+
+  // 4. Save the backpack
+  sessionStorage.setItem('veerji_cart', JSON.stringify(cart));
+
+  // 5. Update the Cart Counter at the top of the screen
+  // (Checks for both types of counters you used on different pages)
+  const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+  const countEl1 = document.getElementById('cartCount');
+  const countEl2 = document.getElementById('nav-cart-count');
+  const countEl3 = document.getElementById('main-cart-counter');
+  
+  if (countEl1) countEl1.textContent = totalItems;
+  if (countEl2) countEl2.textContent = totalItems + " items";
+  if (countEl3) countEl3.textContent = totalItems;
+
+  // 6. Visual Feedback: Make the button turn Green and say "Added ✓"
+  if (btnElement) {
+    const originalText = btnElement.innerHTML;
+    const originalBg = btnElement.style.background;
+    
+    btnElement.classList.add('added');
+    btnElement.innerHTML = 'Added ✓';
+    btnElement.style.background = '#28a745'; // Green success color
+    btnElement.style.color = '#fff';
+
+    // Reset the button after 1.5 seconds so they can buy another one
+    setTimeout(() => {
+      btnElement.classList.remove('added');
+      btnElement.innerHTML = originalText;
+      btnElement.style.background = originalBg;
+    }, 1500);
+  }
+}
