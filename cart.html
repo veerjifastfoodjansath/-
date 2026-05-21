@@ -7,10 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style> 
-    /* ============================================================
-       CART PAGE — CSS (Same theme as your existing design)
-       ============================================================ */
+  <style>
     :root {
       --gold: #D4A853;
       --gold-light: #E8C47A;
@@ -22,12 +19,9 @@
       --green: #25D366;
       --font-display: 'Playfair Display', Georgia, serif;
       --font-body: 'DM Sans', system-ui, sans-serif;
-      --ease: cubic-bezier(0.4, 0, 0.2, 1);
-      --bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { -webkit-font-smoothing: antialiased; }
     body {
       font-family: var(--font-body);
       background: var(--dark);
@@ -35,7 +29,6 @@
       min-height: 100vh;
     }
 
-    /* ── TOP NAVIGATION ── */
     .top-nav {
       position: sticky;
       top: 0;
@@ -49,447 +42,121 @@
       border-bottom: 1px solid rgba(212,168,83,0.15);
     }
     .nav-back {
-      display: flex; align-items: center; gap: 8px;
       color: var(--white); text-decoration: none;
       font-size: 0.85rem; font-weight: 500;
       padding: 8px 16px;
       border: 1px solid rgba(255,255,255,0.15);
       border-radius: 50px;
-      transition: all 0.3s ease;
       background: rgba(255,255,255,0.04);
     }
-    .nav-back:hover { border-color: var(--gold); color: var(--gold); }
     .nav-home {
       font-family: var(--font-display);
       font-size: 1.1rem; font-weight: 700;
       color: var(--gold); text-decoration: none;
     }
-    .nav-cart-count {
-      font-size: 0.82rem;
-      color: rgba(245,242,236,0.5);
-      font-weight: 400;
-    }
+    .nav-cart-count { font-size: 0.82rem; color: rgba(245,242,236,0.5); }
 
-    /* ── PAGE HEADER ── */
-    .page-header {
-      padding: 2.5rem 1.5rem 1rem;
-      text-align: center;
-    }
-    .page-eyebrow {
-      font-size: 0.7rem;
-      letter-spacing: 0.45em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
-    .page-title {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 6vw, 3rem);
-      font-weight: 900;
-      color: var(--white);
-    }
+    .page-header { padding: 2.5rem 1.5rem 1rem; text-align: center; }
+    .page-eyebrow { font-size: 0.7rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .page-title { font-family: var(--font-display); font-size: clamp(2rem, 6vw, 3rem); font-weight: 900; }
 
-    /* ── EMPTY STATE ── */
-    .empty-cart {
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 5rem 2rem; text-align: center; gap: 1.2rem;
-    }
-    .empty-icon { font-size: 4rem; }
-    .empty-text {
-      font-size: 1.1rem;
-      color: rgba(245,242,236,0.5);
-      font-weight: 300;
-    }
-    .empty-btn {
-      padding: 14px 36px;
-      background: var(--gold); color: #111;
-      font-family: var(--font-body);
-      font-weight: 700; font-size: 0.9rem;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      text-decoration: none; border-radius: 50px;
-      transition: all 0.3s ease;
-    }
-    .empty-btn:hover { background: var(--gold-light); }
-
-    /* ── CART ITEMS ── */
-    .cart-wrap {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 1rem 1.2rem 2rem;
-    }
+    .cart-wrap { max-width: 600px; margin: 0 auto; padding: 1rem 1.2rem 2rem; }
+    
     .cart-item {
-      display: flex; align-items: center; gap: 1rem;
-      padding: 1rem;
-      background: var(--dark-3);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 16px;
-      margin-bottom: 0.8rem;
-      transition: all 0.3s ease;
+      display: flex; align-items: center; gap: 1rem; padding: 1rem;
+      background: var(--dark-3); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px; margin-bottom: 0.8rem;
     }
-    .cart-item:hover { border-color: rgba(212,168,83,0.2); }
     .cart-item-info { flex: 1; }
-    .cart-item-parent {
-      font-size: 0.68rem;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-    .cart-item-name {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--white);
-    }
+    .cart-item-parent { font-size: 0.68rem; color: var(--gold); text-transform: uppercase; font-weight: 600; }
+    .cart-item-name { font-family: var(--font-display); font-size: 1rem; font-weight: 700; }
+    
     .qty-wrap { display: flex; align-items: center; gap: 10px; }
     .qty-btn {
       width: 30px; height: 30px; border-radius: 50%;
-      border: 1px solid rgba(212,168,83,0.3);
-      background: transparent;
-      color: var(--gold);
-      font-size: 1rem; cursor: pointer;
+      border: 1px solid rgba(212,168,83,0.3); background: transparent;
+      color: var(--gold); font-size: 1rem; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s ease;
     }
-    .qty-btn:hover { background: rgba(212,168,83,0.12); border-color: var(--gold); }
-    .qty-num {
-      font-weight: 700; font-size: 0.95rem;
-      min-width: 20px; text-align: center;
-    }
-    .cart-item-price {
-      font-family: var(--font-display);
-      font-size: 1rem; font-weight: 700;
-      color: var(--gold);
-      min-width: 55px; text-align: right;
-    }
-    .cart-remove {
-      background: none; border: none;
-      color: rgba(255,255,255,0.25);
-      cursor: pointer; font-size: 1.1rem;
-      padding: 4px; transition: color 0.2s ease;
-      line-height: 1;
-    }
+    .qty-num { font-weight: 700; min-width: 20px; text-align: center; }
+    .cart-item-price { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--gold); min-width: 55px; text-align: right; }
+    .cart-remove { background: none; border: none; color: rgba(255,255,255,0.25); cursor: pointer; font-size: 1.1rem; padding: 4px; }
     .cart-remove:hover { color: var(--red); }
 
-    /* ── LOCATION BOX (NEW) ── */
-    .location-box {
-      background: var(--dark-3);
-      border: 1px solid rgba(212,168,83,0.2);
-      border-radius: 18px;
-      padding: 1.5rem;
-      margin-top: 1.5rem;
-      text-align: center;
-    }
-    .location-title {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 0.5rem;
-    }
-    .location-sub {
-      font-size: 0.82rem;
-      color: rgba(245,242,236,0.55);
-      line-height: 1.5;
-      margin-bottom: 1rem;
-    }
-    .btn-location {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 28px;
-      background: var(--gold);
-      color: #111;
-      font-family: var(--font-body);
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .btn-location:hover { background: var(--gold-light); transform: translateY(-2px); }
-    .btn-location:disabled {
-      background: rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.4);
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    /* Location granted info */
-    .location-granted {
-      background: rgba(37, 211, 102, 0.08);
-      border: 1px solid rgba(37, 211, 102, 0.3);
-      border-radius: 14px;
-      padding: 1rem;
-      margin-top: 1rem;
-      font-size: 0.85rem;
-      color: var(--green);
-      text-align: center;
-    }
-    .location-granted strong { color: var(--white); font-weight: 600; }
-
-    /* Location error */
-    .location-error {
-      background: rgba(224, 85, 85, 0.08);
-      border: 1px solid rgba(224, 85, 85, 0.3);
-      border-radius: 14px;
-      padding: 1rem;
-      margin-top: 1rem;
-      font-size: 0.85rem;
-      color: var(--red);
-      text-align: center;
-      line-height: 1.6;
-    }
-
-    /* Loading state */
-    .location-loading {
-      color: var(--gold);
-      font-size: 0.85rem;
-      margin-top: 1rem;
-      animation: pulse 1.5s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    /* ── ORDER SUMMARY ── */
-    .order-summary {
-      background: var(--dark-3);
-      border: 1px solid rgba(212,168,83,0.15);
-      border-radius: 18px;
-      padding: 1.5rem;
-      margin-top: 1.5rem;
-    }
-    .summary-title {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 1rem;
-    }
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.5rem 0;
-      font-size: 0.85rem;
-      color: rgba(245,242,236,0.6);
-    }
-    .summary-row.highlight { color: var(--gold-light); }
-    .summary-row.total {
-      border-top: 1px solid rgba(255,255,255,0.08);
-      margin-top: 0.5rem;
-      padding-top: 1rem;
-      font-size: 1.1rem;
-      color: var(--white);
-      font-weight: 700;
-    }
-    .summary-row.total span:last-child {
-      font-family: var(--font-display);
-      color: var(--gold);
-      font-size: 1.3rem;
-    }
-    .distance-info {
-      font-size: 0.72rem;
-      color: rgba(245,242,236,0.4);
-      margin-top: 4px;
-      font-style: italic;
-    }
-
-    /* ── ACTION BUTTONS ── */
-    .action-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 1.5rem;
-    }
-    .btn-order {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 16px;
-      background: var(--gold);
-      color: #111;
-      font-family: var(--font-body);
-      font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      border: none;
-      border-radius: 14px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-    .btn-order:hover { background: var(--gold-light); transform: translateY(-2px); }
-    .btn-whatsapp { background: var(--green); color: #fff; }
-    .btn-whatsapp:hover { background: #1fbc58; }
-
-    /* Disabled state for action buttons */
-    .btn-order.disabled {
-      background: rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.3);
-      cursor: not-allowed;
-      pointer-events: none;
-      transform: none;
-    }
-
-    .btn-continue {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px;
-      background: transparent;
-      color: var(--white);
-      font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 0.85rem;
-      border: 1.5px solid rgba(255,255,255,0.15);
-      border-radius: 14px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-    .btn-continue:hover { border-color: var(--gold); color: var(--gold); }
-
-    /* Warning message for location */
-    .checkout-warning {
-      text-align: center;
-      padding: 12px;
-      background: rgba(212, 168, 83, 0.08);
-      border: 1px dashed rgba(212, 168, 83, 0.3);
-      border-radius: 12px;
-      font-size: 0.82rem;
-      color: var(--gold-light);
-      margin-top: 1rem;
-      line-height: 1.5;
-    }
-
-    .cart-note {
-      font-size: 0.72rem;
-      color: rgba(245,242,236,0.25);
-      text-align: center;
-      margin-top: 1rem;
-      line-height: 1.5;
-    }
-
-    /* Map preview link */
-    .map-link {
-      display: inline-block;
-      margin-top: 8px;
-      font-size: 0.78rem;
-      color: var(--gold);
-      text-decoration: underline;
-      cursor: pointer;
-    }
-    .map-link:hover { color: var(--gold-light); }
-
-    /* ── UPSELL DRINKS SLIDER (CART PAGE) ── */
-    .upsell-section {
-      max-width: 600px;
-      margin: 1rem auto 4rem;
-      padding: 0 1.2rem;
-    }
-    .upsell-header h3 {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      color: var(--white);
-      margin-bottom: 1rem;
-      text-align: left;
-    }
-    .drinks-slider {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding-bottom: 10px;
-      scrollbar-width: none; /* Firefox */
-    }
-    .drinks-slider::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+    .location-box { background: var(--dark-3); border: 1px solid rgba(212,168,83,0.2); border-radius: 18px; padding: 1.5rem; margin-top: 1.5rem; text-align: center; }
+    .location-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .location-sub { font-size: 0.82rem; color: rgba(245,242,236,0.55); margin-bottom: 1rem; }
     
-    .drink-slide {
-      scroll-snap-align: center;
-      flex-shrink: 0;
-      width: 105px;
-      background: var(--dark-3);
-      border: 1px solid rgba(212,168,83,0.15);
-      border-radius: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 12px 8px;
-      transition: transform 0.3s ease;
+    .btn-location {
+      padding: 14px 28px; background: var(--gold); color: #111;
+      font-family: var(--font-body); font-weight: 700; font-size: 0.9rem;
+      border: none; border-radius: 50px; cursor: pointer; text-transform: uppercase;
     }
-    .drink-slide img {
-      width: 45px;
-      height: 65px;
-      object-fit: contain;
-      margin-bottom: 8px;
-    }
-    .drink-name {
-      font-size: 0.75rem;
-      color: var(--white);
-      font-weight: 500;
-      text-align: center;
-      margin-bottom: 2px;
-    }
-    .drink-price {
-      font-size: 0.75rem;
-      color: var(--gold);
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .slide-add-btn {
-      background: var(--gold);
-      color: #111;
-      border: none;
-      padding: 8px 0;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      cursor: pointer;
-      width: 100%;
-      text-transform: uppercase;
-      transition: all 0.3s ease;
-    }
-    .slide-add-btn:hover { background: var(--gold-light); transform: scale(1.05); }
-    .slide-add-btn.added { background: var(--green); color: white; }
+    .btn-location:disabled { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); cursor: not-allowed; }
 
+    .location-granted { background: rgba(37, 211, 102, 0.08); border: 1px solid rgba(37, 211, 102, 0.3); border-radius: 14px; padding: 1rem; margin-top: 1rem; font-size: 0.85rem; color: var(--green); }
+    .location-error { background: rgba(224, 85, 85, 0.08); border: 1px solid rgba(224, 85, 85, 0.3); border-radius: 14px; padding: 1rem; margin-top: 1rem; font-size: 0.85rem; color: var(--red); line-height: 1.6; }
+    .location-loading { color: var(--gold); font-size: 0.85rem; margin-top: 1rem; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+    .order-summary { background: var(--dark-3); border: 1px solid rgba(212,168,83,0.15); border-radius: 18px; padding: 1.5rem; margin-top: 1.5rem; }
+    .summary-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
+    .summary-row { display: flex; justify-content: space-between; padding: 0.5rem 0; font-size: 0.85rem; color: rgba(245,242,236,0.6); }
+    .summary-row.highlight { color: var(--gold-light); }
+    .summary-row.total { border-top: 1px solid rgba(255,255,255,0.08); margin-top: 0.5rem; padding-top: 1rem; font-size: 1.1rem; font-weight: 700; }
+    .summary-row.total span:last-child { font-family: var(--font-display); color: var(--gold); font-size: 1.3rem; }
+    .distance-info { font-size: 0.72rem; color: rgba(245,242,236,0.4); margin-top: 4px; }
+
+    .action-buttons { display: flex; flex-direction: column; gap: 12px; margin-top: 1.5rem; }
+    .btn-order {
+      display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px;
+      background: var(--gold); color: #111; font-family: var(--font-body); font-weight: 700; font-size: 0.95rem;
+      border: none; border-radius: 14px; text-decoration: none; text-transform: uppercase; cursor: pointer;
+    }
+    .btn-whatsapp { background: var(--green); color: #fff; }
+    .btn-order.disabled { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.3); cursor: not-allowed; pointer-events: none; }
+    
+    .btn-continue {
+      display: flex; align-items: center; justify-content: center; padding: 14px;
+      background: transparent; color: var(--white); font-family: var(--font-body); font-weight: 600; font-size: 0.85rem;
+      border: 1.5px solid rgba(255,255,255,0.15); border-radius: 14px; text-decoration: none;
+    }
+    .checkout-warning { text-align: center; padding: 12px; background: rgba(212, 168, 83, 0.08); border: 1px dashed rgba(212, 168, 83, 0.3); border-radius: 12px; font-size: 0.82rem; color: var(--gold-light); margin-top: 1rem; }
+    .cart-note { font-size: 0.72rem; color: rgba(245,242,236,0.25); text-align: center; margin-top: 1rem; }
+    .map-link { display: inline-block; margin-top: 8px; font-size: 0.78rem; color: var(--gold); text-decoration: underline; }
+
+    /* ── UPSELL DRINKS SLIDER ── */
+    .upsell-section { max-width: 600px; margin: 1rem auto 4rem; padding: 0 1.2rem; }
+    .upsell-header h3 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 1rem; }
+    .drinks-slider { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
+    .drinks-slider::-webkit-scrollbar { display: none; }
+    .drink-slide { flex-shrink: 0; width: 105px; background: var(--dark-3); border: 1px solid rgba(212,168,83,0.15); border-radius: 16px; display: flex; flex-direction: column; align-items: center; padding: 12px 8px; }
+    .drink-slide img { width: 45px; height: 65px; object-fit: contain; margin-bottom: 8px; }
+    .drink-name { font-size: 0.75rem; font-weight: 500; text-align: center; margin-bottom: 2px; }
+    .drink-price { font-size: 0.75rem; color: var(--gold); font-weight: 700; margin-bottom: 8px; }
+    .slide-add-btn { background: var(--gold); color: #111; border: none; padding: 8px 0; border-radius: 12px; font-size: 0.75rem; font-weight: 700; cursor: pointer; width: 100%; text-transform: uppercase; }
+    .slide-add-btn.added { background: var(--green); color: white; }
   </style>
 </head>
 <body>
-  <!-- ============================================================
-       TOP NAVIGATION
-       ============================================================ -->
+
   <nav class="top-nav">
-    <a href="javascript:history.back()" class="nav-back">&#8592; Back</a>
+    <a href="javascript:history.back()" class="nav-back">← Back</a>
     <a href="index.html" class="nav-home">Veer Ji</a>
     <span class="nav-cart-count" id="nav-cart-count">Cart</span>
   </nav>
 
-  <!-- Page Header -->
   <div class="page-header">
     <p class="page-eyebrow">Your Order</p>
     <h1 class="page-title">Your Cart 🛒</h1>
   </div>
 
-  <!-- Cart content -->
-  <div class="cart-wrap" id="cart-wrap"></div>
   <div class="cart-wrap" id="cart-wrap"></div>
 
   <div class="upsell-section" id="upsell-section">
     <div class="upsell-header">
       <h3>Add a refreshing drink? 🥤</h3>
     </div>
-    
     <div class="drinks-slider">
       <div class="drink-slide">
         <img src="images/drinks/pepsi.png" alt="Pepsi" onerror="this.style.display='none'">
@@ -497,43 +164,18 @@
         <span class="drink-price">₹20</span>
         <button class="slide-add-btn" onclick="addDrinkFromCart(this, 'Pepsi', 20)">Add +</button>
       </div>
-      
       <div class="drink-slide">
         <img src="images/drinks/fanta.png" alt="Fanta" onerror="this.style.display='none'">
         <span class="drink-name">Fanta</span>
         <span class="drink-price">₹20</span>
         <button class="slide-add-btn" onclick="addDrinkFromCart(this, 'Fanta', 20)">Add +</button>
       </div>
-
-      <div class="drink-slide">
-        <img src="images/drinks/campa-orange.png" alt="Campa-Fanta" onerror="this.style.display='none'">
-        <span class="drink-name">Campa-Fanta</span>
-        <span class="drink-price">₹20</span>
-        <button class="slide-add-btn" onclick="addDrinkFromCart(this, 'Campa-Fanta', 20)">Add +</button>
-      </div>
-
-
-      <div class="drink-slide">
-        <img src="images/drinks/campa-cola.png" alt="Campa-cola" onerror="this.style.display='none'">
-        <span class="drink-name">Campa-cola</span>
-        <span class="drink-price">₹20</span>
-        <button class="slide-add-btn" onclick="addDrinkFromCart(this, 'Campa-cola', 20)">Add +</button>
-      </div>
-
-      <div class="drink-slide">
-        <img src="images/drinks/mountain.png" alt="Mountain Dew" onerror="this.style.display='none'">
-        <span class="drink-name">Mountain Dew</span>
-        <span class="drink-price">₹20</span>
-        <button class="slide-add-btn" onclick="addDrinkFromCart(this,'Mountain Dew', 20)">Add +</button>
-      </div>
-      
       <div class="drink-slide">
         <img src="images/drinks/sprite.png" alt="Sprite" onerror="this.style.display='none'">
         <span class="drink-name">Sprite</span>
         <span class="drink-price">₹20</span>
         <button class="slide-add-btn" onclick="addDrinkFromCart(this, 'Sprite', 20)">Add +</button>
       </div>
-
       <div class="drink-slide">
         <img src="images/drinks/thumbsup.png" alt="Thumbs Up" onerror="this.style.display='none'">
         <span class="drink-name">Thumbs Up</span>
@@ -543,363 +185,213 @@
     </div>
   </div>
 
-
   <script>
-  /* ============================================================
-     CART PAGE — JAVASCRIPT (with Location-based Delivery)
-     ============================================================ */
+    /* ============ ALL CONFIGS ============ */
+    const SHOP_LOCATION = { lat: 29.3279995, lng: 77.851953 };
+    const RATE_PER_METER = 0.015;
+    const PHONE_NUMBER = "919286175004";
 
-  /* ============ CONFIG — CHANGE VALUES HERE ============ */
-  const SHOP_LOCATION = {
-    lat: 29.3279995,
-    lng: 77.851953,
-    name: "Veer Ji, Chhabra Colony, Jansath, Muzaffarnagar"
-  };
-  const RATE_PER_METER = 0.015;   // ₹ per meter
-  const PHONE_NUMBER = "919286175004"; // For WhatsApp & Call
-  /* ====================================================== */
+    let userLocation = null;
+    let distanceMeters = 0;
 
-  // User location state
-  let userLocation = null;
-  let distanceMeters = 0;
-  let deliveryCharge = 0;
-
-  /* ── CART STORAGE (sessionStorage = clears on close/refresh) ── */
-  function getCart() {
-    try { return JSON.parse(sessionStorage.getItem('veerji_cart') || '[]'); }
-    catch { return []; }
-  }
-  function saveCart(cart) {
-    sessionStorage.setItem('veerji_cart', JSON.stringify(cart));
-  }
-  function updateQty(id, delta) {
-    let cart = getCart();
-    const item = cart.find(c => c.id === id);
-    if (!item) return;
-    item.qty = Math.max(1, item.qty + delta);
-    saveCart(cart);
-    renderCart();
-  }
-  function removeItem(id) {
-    let cart = getCart().filter(c => c.id !== id);
-    saveCart(cart);
-    renderCart();
-  }
-
-  /* ── HAVERSINE FORMULA — Calculate distance in METERS ── */
-  function calculateDistance(lat1, lng1, lat2, lng2) {
-    const R = 6371000; // Earth's radius in meters
-    const toRad = deg => deg * Math.PI / 180;
-    const dLat = toRad(lat2 - lat1);
-    const dLng = toRad(lng2 - lng1);
-    const a = Math.sin(dLat / 2) ** 2 +
-              Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-              Math.sin(dLng / 2) ** 2;
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c; // distance in meters
-  }
-
-  /* ── REQUEST USER LOCATION ── */
-  function requestLocation() {
-    const statusEl = document.getElementById('location-status');
-    const btn = document.getElementById('btn-grant-location');
-
-    if (!navigator.geolocation) {
-      statusEl.innerHTML = `<div class="location-error">⚠️ Your browser doesn't support location. Please use a modern browser.</div>`;
-      return;
+    function getCart() {
+      try { return JSON.parse(sessionStorage.getItem('veerji_cart') || '[]'); }
+      catch { return []; }
+    }
+    function saveCart(cart) {
+      sessionStorage.setItem('veerji_cart', JSON.stringify(cart));
+    }
+    function updateQty(id, delta) {
+      let cart = getCart();
+      const item = cart.find(c => c.id === id);
+      if (!item) return;
+      item.qty = Math.max(1, item.qty + delta);
+      saveCart(cart);
+      renderCart();
+    }
+    function removeItem(id) {
+      let cart = getCart().filter(c => c.id !== id);
+      saveCart(cart);
+      renderCart();
     }
 
-    btn.disabled = true;
-    statusEl.innerHTML = `<div class="location-loading">📡 Fetching your location...</div>`;
-
-    navigator.geolocation.getCurrentPosition(
-      // SUCCESS
-      (position) => {
-        userLocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        distanceMeters = calculateDistance(
-          SHOP_LOCATION.lat, SHOP_LOCATION.lng,
-          userLocation.lat, userLocation.lng
-        );
-        renderCart();
-      },
-      // ERROR
-      (error) => {
-        btn.disabled = false;
-        let msg = "";
-        switch(error.code) {
-          case error.PERMISSION_DENIED:
-            msg = "❌ Location access denied.<br><strong>Location batane pr hi checkout kar payenge!</strong><br>Please enable location and try again.";
-            break;
-          case error.POSITION_UNAVAILABLE:
-            msg = "❌ Location unavailable. Please check your GPS/internet.";
-            break;
-          case error.TIMEOUT:
-            msg = "❌ Location request timed out. Please try again.";
-            break;
-          default:
-            msg = "❌ Could not get location. Please try again.";
-        }
-        statusEl.innerHTML = `<div class="location-error">${msg}</div>`;
-      },
-      { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
-    );
-  }
-
-  /* ── BUILD WHATSAPP MESSAGE ── */
-  function buildWhatsAppMsg(cart, subtotal, delivery, total) {
-    let msg = `Hello,Veer Ji Fast Food! 🙏\n\nI want to order:\n\n`;
-    cart.forEach(item => {
-      msg += `• ${item.name} (${item.parent}) × ${item.qty} = ₹${item.price * item.qty}\n`;
-    });
-    msg += `\n📍 My Location: https://www.google.com/maps/dir/${SHOP_LOCATION.lat},${SHOP_LOCATION.lng}/${userLocation.lat},${userLocation.lng}`;
-    msg += `\n📏 Distance: ${(distanceMeters/1000).toFixed(2)} km`;
-    msg += `\n\n*Subtotal:* ₹${subtotal}`;
-    msg += `\n*Delivery:* ${delivery === 0 ? 'Free' : '₹' + delivery}`;
-    msg += `\n*TOTAL: ₹${total}*\n\nPlease confirm my order. Thank you!`;
-    return msg;
-  }
-
-  /* ── RENDER CART ── */
-  function renderCart() {
-    const cart = getCart();
-    const wrap = document.getElementById('cart-wrap');
-    const countEl = document.getElementById('nav-cart-count');
-
-    if (countEl) {
-      countEl.textContent = cart.length > 0 ? `${cart.length} item${cart.length > 1 ? 's' : ''}` : 'Cart';
+    function calculateDistance(lat1, lng1, lat2, lng2) {
+      const R = 6371000;
+      const toRad = deg => deg * Math.PI / 180;
+      const dLat = toRad(lat2 - lat1);
+      const dLng = toRad(lng2 - lng1);
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
+      return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
     }
 
-    // Empty cart
-    if (cart.length === 0) {
-      wrap.innerHTML = `
-        <div class="empty-cart">
-          <div class="empty-icon">🛒</div>
-          <p class="empty-text">Your cart is empty.<br>Add something delicious!</p>
-          <a href="index.html" class="empty-btn">Browse Menu</a>
-        </div>
-      `;
-      return;
-    }
-
-    const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-    const locationGranted = userLocation !== null;
-    // --- NEW LOGIC: DELIVERY RULES ---
-    let deliveryCharge = 0;
-    let deliveryText = "";
-    let canDeliver = true;
-
-    if (locationGranted) {
-      if (distanceMeters > 5000) {
-        canDeliver = false; // Beyond 5km - No delivery
-        deliveryText = "Out of delivery area (> 5km)";
-      } else if (distanceMeters <= 300) {
-        deliveryCharge = 0; // Free under 300m
-        deliveryText = "Free (Under 300m)";
-      } else if (distanceMeters <= 3000 && subtotal > 149) {
-        deliveryCharge = 0; // Free under 3km if order > ₹149
-        deliveryText = "Free (Order > ₹149)";
-      } else {
-        // Standard charge for everything else
-        deliveryCharge = Math.round(distanceMeters * RATE_PER_METER * 100) / 100;
-        deliveryText = `₹${deliveryCharge} (${Math.round(distanceMeters)}m × ₹0.015/m)`;
+    function requestLocation() {
+      const statusEl = document.getElementById('location-status');
+      const btn = document.getElementById('btn-grant-location');
+      if (!navigator.geolocation) {
+        statusEl.innerHTML = `<div class="location-error">⚠️ Browser doesn't support geolocation.</div>`;
+        return;
       }
+      btn.disabled = true;
+      statusEl.innerHTML = `<div class="location-loading">📡 Fetching location coordinates...</div>`;
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          userLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
+          distanceMeters = calculateDistance(SHOP_LOCATION.lat, SHOP_LOCATION.lng, userLocation.lat, userLocation.lng);
+          renderCart();
+        },
+        (error) => {
+          btn.disabled = false;
+          let msg = "❌ Location access denied. Location setup required to complete checkout.";
+          statusEl.innerHTML = `<div class="location-error">${msg}</div>`;
+        },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+      );
     }
-    const total = locationGranted
-      ? Math.round((subtotal + deliveryCharge) * 100) / 100
-      : subtotal;
 
-    wrap.innerHTML = `
-      <!-- Cart items -->
-      ${cart.map(item => `
-        <div class="cart-item" id="ci-${item.id}">
-          <div class="cart-item-info">
-            <div class="cart-item-parent">${item.parent}</div>
-            <div class="cart-item-name">${item.name}</div>
-          </div>
-          <div class="qty-wrap">
-            <button class="qty-btn" onclick="updateQty('${item.id}', -1)">−</button>
-            <span class="qty-num">${item.qty}</span>
-            <button class="qty-btn" onclick="updateQty('${item.id}', 1)">+</button>
-          </div>
-          <div class="cart-item-price">₹${item.price * item.qty}</div>
-          <button class="cart-remove" onclick="removeItem('${item.id}')" title="Remove">✕</button>
-        </div>
-      `).join('')}
+    function buildWhatsAppMsg(cart, subtotal, delivery, total) {
+      let msg = `Hello Veer Ji Fast Food! 🙏\n\nI want to order:\n\n`;
+      cart.forEach(item => {
+        msg += `• ${item.name} (${item.parent}) × ${item.qty} = ₹${item.price * item.qty}\n`;
+      });
+      msg += `\n📍 Location: https://www.google.com/maps/search/?api=1&query=${userLocation.lat},${userLocation.lng}`;
+      msg += `\n📏 Distance: ${(distanceMeters/1000).toFixed(2)} km`;
+      msg += `\n\n*Subtotal:* ₹${subtotal}`;
+      msg += `\n*Delivery:* ${delivery === 0 ? 'Free' : '₹' + delivery}`;
+      msg += `\n*TOTAL: ₹${total}*\n\nPlease confirm my order. Thank you!`;
+      return msg;
+    }
 
-      <!-- LOCATION BOX -->
-      <div class="location-box">
-        <div class="location-title">📍 Delivery Location</div>
-        <div class="location-sub">
-          To calculate delivery charges, we need your location.<br>
-          <strong style="color: var(--gold-light);">Location batane pr hi checkout kar payenge!</strong>
-        </div>
-        ${!locationGranted ? `
-          <button class="btn-location" id="btn-grant-location" onclick="requestLocation()">
-            📡 Grant Location Access
-          </button>
-        ` : `
-          <div class="location-granted">
-            ✅ Location Detected Successfully<br>
-            <strong>Distance: ${(distanceMeters/1000).toFixed(2)} km</strong> from shop
-            <br>
-            <a class="map-link" href="https://www.google.com/maps/dir/${SHOP_LOCATION.lat},${SHOP_LOCATION.lng}/${userLocation.lat},${userLocation.lng}" target="_blank">
-              View Route on Google Maps →
-            </a>
-          </div>
-        `}
-        <div id="location-status"></div>
-      </div>
+    function renderCart() {
+      const cart = getCart();
+      const wrap = document.getElementById('cart-wrap');
+      const countEl = document.getElementById('nav-cart-count');
 
-      <!-- ORDER SUMMARY -->
-      <div class="order-summary">
-        <div class="summary-title">Order Summary</div>
-        <div class="summary-row">
-          <span>Subtotal (${cart.length} item${cart.length > 1 ? 's' : ''})</span>
-          <span>₹${subtotal}</span>
+      if (countEl) {
+        countEl.textContent = cart.length > 0 ? `${cart.length} item${cart.length > 1 ? 's' : ''}` : 'Cart';
+      }
+
+      if (cart.length === 0) {
+        wrap.innerHTML = `
+          <div class="empty-cart">
+            <div class="empty-icon">🛒</div>
+            <p class="empty-text">Your cart is empty.<br>Add something delicious!</p>
+            <a href="index.html" class="empty-btn">Browse Menu</a>
+          </div>
+        `;
+        document.getElementById('upsell-section').style.display = 'none';
+        return;
+      }
+      document.getElementById('upsell-section').style.display = 'block';
+
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      const locationGranted = userLocation !== null;
+      
+      let deliveryCharge = 0;
+      let deliveryText = "";
+      let canDeliver = true;
+
+      if (locationGranted) {
+        if (distanceMeters > 5000) {
+          canDeliver = false;
+          deliveryText = "Out of delivery area (> 5km)";
+        } else if (distanceMeters <= 300) {
+          deliveryCharge = 0;
+          deliveryText = "Free (Under 300m)";
+        } else if (distanceMeters <= 3000 && subtotal > 149) {
+          deliveryCharge = 0;
+          deliveryText = "Free (Order > ₹149)";
+        } else {
+          deliveryCharge = Math.round(distanceMeters * RATE_PER_METER);
+          deliveryText = `₹${deliveryCharge} (${(distanceMeters/1000).toFixed(2)} km)`;
+        }
+      }
+
+      const total = locationGranted ? (subtotal + deliveryCharge) : subtotal;
+
+      wrap.innerHTML = `
+        ${cart.map(item => `
+          <div class="cart-item">
+            <div class="cart-item-info">
+              <div class="cart-item-parent">${item.parent}</div>
+              <div class="cart-item-name">${item.name}</div>
+            </div>
+            <div class="qty-wrap">
+              <button class="qty-btn" onclick="updateQty('${item.id}', -1)">−</button>
+              <span class="qty-num">${item.qty}</span>
+              <button class="qty-btn" onclick="updateQty('${item.id}', 1)">+</button>
+            </div>
+            <div class="cart-item-price">₹${item.price * item.qty}</div>
+            <button class="cart-remove" onclick="removeItem('${item.id}')">✕</button>
+          </div>
+        `).join('')}
+
+        <div class="location-box">
+          <div class="location-title">📍 Delivery Location</div>
+          <div class="location-sub">
+            Location needed to calculate final pricing logic.<br>
+            <strong style="color: var(--gold-light);">Location verification required to checkout!</strong>
+          </div>
+          ${!locationGranted ? `
+            <button class="btn-location" id="btn-grant-location" onclick="requestLocation()">📡 Grant Location Access</button>
+          ` : `
+            <div class="location-granted">
+              ✅ Location Verified<br>
+              <strong>Distance: ${(distanceMeters/1000).toFixed(2)} km</strong>
+            </div>
+          `}
+          <div id="location-status"></div>
         </div>
-        ${locationGranted ? `
+
+        <div class="order-summary">
+          <div class="summary-title">Order Summary</div>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>₹${subtotal}</span>
+          </div>
           <div class="summary-row highlight">
             <span>Delivery Charge</span>
-            <span>${deliveryText}</span>
+            <span>${locationGranted ? deliveryText : 'Verify location above'}</span>
           </div>
-        ` : `
-          <div class="summary-row" style="color: rgba(255,255,255,0.3); font-style: italic;">
-            <span>Delivery Charge</span>
-            <span>Grant location to calculate</span>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span>₹${total}</span>
           </div>
-        `}
-        <div class="summary-row total">
-          <span>Total</span>
-          <span>₹${total}</span>
         </div>
-      </div>
 
-      <div class="action-buttons">
-
-        ${locationGranted && canDeliver ? `
-          <a
-            href="https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(buildWhatsAppMsg(cart, subtotal, deliveryCharge, total))}"
-            target="_blank"
-            class="btn-order btn-whatsapp"
-          >
-            📲 Order via WhatsApp
-          </a>
-          <a href="tel:+${PHONE_NUMBER}" class="btn-order">
-            📞 Call to Order — +91 92861 75004
-          </a>
-        ` : locationGranted && !canDeliver ? `
-          <button class="btn-order btn-whatsapp disabled" disabled>
-            🚫 Too Far (Max 5km)
-          </button>
-          <div class="checkout-warning" style="color: var(--red); border-color: var(--red);">
-            ⚠️ <strong>Sorry, we do not deliver beyond 5km!</strong><br>
-            Your location is ${(distanceMeters/1000).toFixed(2)} km away.
-          </div>
-        ` : `
-          <button class="btn-order btn-whatsapp disabled" disabled>
-            🔒 Grant Location to Order via WhatsApp
-          </button>
-          <button class="btn-order disabled" disabled>
-            🔒 Grant Location to Call
-          </button>
-          <div class="checkout-warning">
-            ⚠️ <strong>Location batane pr hi checkout kar payenge!</strong><br>
-            Please click "Grant Location Access" above to proceed.
-          </div>
-        `}
-
-        <a href="index.html" class="btn-continue">
-          ← Continue Shopping
-        </a>
-      </div>
-
-      <p class="cart-note">
-        ⚠️ Cart resets if you close or refresh the browser.<br>
-        Complete your order before leaving!
-      </p>
-    `;
-  }
-      <!-- ACTION BUTTONS -->
-      <div class="action-buttons">
-
-        ${locationGranted ? `
-          <a
-            href="https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(buildWhatsAppMsg(cart, subtotal, deliveryCharge, PACKAGING_CHARGE, total))}"
-            target="_blank"
-            class="btn-order btn-whatsapp"
-          >
-            📲 Order via WhatsApp
-          </a>
-          <a href="tel:+${PHONE_NUMBER}" class="btn-order">
-            📞 Call to Order — +91 92861 75004
-          </a>
-        ` : `
-          <button class="btn-order btn-whatsapp disabled" disabled>
-            🔒 Grant Location to Order via WhatsApp
-          </button>
-          <button class="btn-order disabled" disabled>
-            🔒 Grant Location to Call
-          </button>
-          <div class="checkout-warning">
-            ⚠️ <strong>Location batane pr hi checkout kar payenge!</strong><br>
-            Please click "Grant Location Access" above to proceed.
-          </div>
-        `}
-
-        <a href="index.html" class="btn-continue">
-          ← Continue Shopping
-        </a>
-      </div>
-
-      <p class="cart-note">
-        ⚠️ Cart resets if you close or refresh the browser.<br>
-        Complete your order before leaving!
-      </p>
-    `;
-  }
-
-  // Initial render
-  renderCart();
-
-  /* ── UPSELL SLIDER LOGIC ── */
-  function addDrinkFromCart(btnElement, drinkName, drinkPrice) {
-    // Prevent double clicking
-    if (btnElement.classList.contains('added')) return;
-
-    // 1. Generate ID and fetch current cart
-    const itemID = 'drink-' + drinkName.toLowerCase().replace(/\s+/g, '-');
-    let cart = getCart();
-
-    // 2. Add drink or increase quantity
-    const existingItem = cart.find(item => item.id === itemID);
-    if (existingItem) {
-      existingItem.qty += 1;
-    } else {
-      cart.push({ id: itemID, name: drinkName, price: drinkPrice, parent: 'Cold Drinks', qty: 1 });
+        <div class="action-buttons">
+          ${locationGranted && canDeliver ? `
+            <a href="https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(buildWhatsAppMsg(cart, subtotal, deliveryCharge, total))}" target="_blank" class="btn-order btn-whatsapp">📲 Order via WhatsApp</a>
+          ` : locationGranted && !canDeliver ? `
+            <button class="btn-order btn-whatsapp disabled" disabled>🚫 Cannot Deliver</button>
+            <div class="checkout-warning" style="color: var(--red); border-color: var(--red);">Max delivery limit is 5km.</div>
+          ` : `
+            <button class="btn-order btn-whatsapp disabled" disabled>🔒 Verify Location to Unlock</button>
+          `}
+          <a href="index.html" class="btn-continue">← Continue Shopping</a>
+        </div>
+      `;
     }
 
-    // 3. Save to backpack
-    saveCart(cart);
-    
-    // 4. THIS IS THE MAGIC: Re-render the cart instantly!
-    renderCart(); 
+    function addDrinkFromCart(btnElement, drinkName, drinkPrice) {
+      if (btnElement.classList.contains('added')) return;
+      const itemID = 'drink-' + drinkName.toLowerCase().replace(/\s+/g, '-');
+      let cart = getCart();
+      const existingItem = cart.find(item => item.id === itemID);
+      if (existingItem) { existingItem.qty += 1; } 
+      else { cart.push({ id: itemID, name: drinkName, price: drinkPrice, parent: 'Cold Drinks', qty: 1 }); }
+      saveCart(cart);
+      renderCart();
 
-    // 5. Button visual feedback
-    const originalText = btnElement.innerHTML;
-    btnElement.classList.add('added');
-    btnElement.innerHTML = 'Added ✓';
+      btnElement.classList.add('added');
+      btnElement.innerHTML = 'Added ✓';
+      setTimeout(() => {
+        btnElement.classList.remove('added');
+        btnElement.innerHTML = 'Add +';
+      }, 2000);
+    }
 
-    // Reset button after 2 seconds
-    setTimeout(() => {
-      btnElement.classList.remove('added');
-      btnElement.innerHTML = originalText;
-    }, 2000);
-  }
-  
+    renderCart();
   </script>
-
 </body>
 </html>
