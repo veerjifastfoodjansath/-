@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* ──────────────────────────────────────────────
+ /* ──────────────────────────────────────────────
      PART 2: VIDEO HERO
      Video plays once, text appears on top, video visible
      ────────────────────────────────────────────── */
@@ -55,40 +55,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // Force video visible immediately
     heroVideo.style.opacity = '1';
     heroVideo.style.display = 'block';
-    heroVideo.autoplay = true;
     heroVideo.loop = false; // Play only once
     heroVideo.muted = true;
     heroVideo.playsInline = true;
 
-    // Try to play the video
-    const playPromise = heroVideo.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(error => {
-        console.log('Video autoplay failed:', error);
-        // Even if video fails, show content
-        if (heroContent) {
-          heroContent.classList.add('visible');
-        }
-      });
-    }
+    // WAIT 2 SECONDS FOR SPLASH SCREEN TO FADE BEFORE DROPPING BURGER
+    setTimeout(() => {
+      const playPromise = heroVideo.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.log('Video autoplay failed:', error);
+        });
+      }
+    }, 2000);
 
-    // Show hero content immediately (text appears on video)
-    if (heroContent) {
-      setTimeout(() => {
-        heroContent.classList.add('visible');
-      }, 500);
-    }
-
-    // Show scroll hint after content appears
-    if (scrollHint) {
-      setTimeout(() => {
-        scrollHint.classList.add('show');
-      }, 1500);
-    }
-
-    // After video ends (plays once), freeze on last frame
+    // After video ends (plays once), freeze on last frame and show text
     heroVideo.addEventListener('ended', () => {
       heroVideo.pause();
+      if (heroContent) heroContent.classList.add('visible');
+      setTimeout(() => {
+        if (scrollHint) scrollHint.classList.add('show');
+      }, 1000);
     });
 
     // Fallback: if video takes too long to load, ensure content is visible
@@ -99,13 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (scrollHint && !scrollHint.classList.contains('show')) {
         scrollHint.classList.add('show');
       }
-    }, 3000);
+    }, 4000);
   } else {
     // No video — show content immediately
     if (heroContent) heroContent.classList.add('visible');
     if (scrollHint) setTimeout(() => scrollHint.classList.add('show'), 800);
   }
-
 
   /* ──────────────────────────────────────────────
      PART 3: MENU SECTION — Scroll-triggered item reveal
