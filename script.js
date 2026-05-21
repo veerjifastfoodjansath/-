@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
      PART 1: SPLASH SCREEN
      Shows for 2s then fades out with scale effect
      ────────────────────────────────────────────── */
- const splash = document.getElementById('splash-screen');
+  const splash = document.getElementById('splash-screen');
 
   // Lock scroll + force page to top immediately
   document.body.style.overflow = 'hidden';
@@ -30,39 +30,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ──────────────────────────────────────────────
      PART 2: VIDEO HERO
-     Video plays once → text fades in → scroll hint appears
+     Video plays once, text appears on top, video visible
      ────────────────────────────────────────────── */
   const heroVideo = document.getElementById('hero-video');
   const heroContent = document.getElementById('hero-content');
   const scrollHint = document.getElementById('scroll-hint');
 
   if (heroVideo) {
-    // Force visible immediately
+    // Force video visible immediately
     heroVideo.style.opacity = '1';
+    heroVideo.autoplay = true;
+    heroVideo.loop = false; // Play only once
 
-    // After video ends (plays once), show hero text + scroll hint
-    heroVideo.addEventListener('ended', () => {
-      // Freeze on last frame
-      heroVideo.pause();
+    // Try to play the video
+    const playPromise = heroVideo.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        console.log('Video autoplay failed:', error);
+      });
+    }
 
-      // Fade in headline + CTA
-      if (heroContent) {
-        heroContent.classList.add('visible');
-      }
-
-      // Show scroll hint after text appears
+    // Show hero content immediately (text appears on video)
+    if (heroContent) {
       setTimeout(() => {
-        if (scrollHint) scrollHint.classList.add('show');
-      }, 1000);
+        heroContent.classList.add('visible');
+      }, 500);
+    }
+
+    // Show scroll hint after content appears
+    if (scrollHint) {
+      setTimeout(() => {
+        scrollHint.classList.add('show');
+      }, 1500);
+    }
+
+    // After video ends (plays once), hide nothing - keep page as is
+    heroVideo.addEventListener('ended', () => {
+      // Video freezes on last frame
+      heroVideo.pause();
     });
 
-    // Fallback: if video takes too long to load, show content after 4s
+    // Fallback: if video takes too long to load, ensure content is visible
     setTimeout(() => {
       if (heroContent && !heroContent.classList.contains('visible')) {
         heroContent.classList.add('visible');
-        if (scrollHint) scrollHint.classList.add('show');
       }
-    }, 4000);
+      if (scrollHint && !scrollHint.classList.contains('show')) {
+        scrollHint.classList.add('show');
+      }
+    }, 3000);
   } else {
     // No video — show content immediately
     if (heroContent) heroContent.classList.add('visible');

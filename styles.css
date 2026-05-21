@@ -152,7 +152,7 @@ body {
     to bottom,
     rgba(0,0,0,0.3) 0%,
     rgba(0,0,0,0.2) 40%,
-    rgba(0,0,0,0.65) 100%
+    rgba(0,0,0,0.55) 100%
   );
   z-index: 1;
 }
@@ -285,7 +285,7 @@ body {
   align-items: center;
   gap: 8px;
   opacity: 0;
-  transition: opacity 0.6s ease 2s;
+  transition: opacity 0.6s ease 0.5s;
 }
 
 .scroll-hint.show { opacity: 1; }
@@ -1000,16 +1000,16 @@ body {
 
 /* Facebook */
 .social-btn.fb {
-  background: rgba(24,119,242,0.08);
-  color: #1877F2;
-  border-color: rgba(24,119,242,0.2);
+  background: rgba(59,89,152,0.08);
+  color: #3B5998;
+  border-color: rgba(59,89,152,0.2);
 }
-.social-btn.fb svg { fill: #1877F2; }
+.social-btn.fb svg { fill: #3B5998; }
 .social-btn.fb:hover {
-  background: rgba(24,119,242,0.16);
-  border-color: rgba(24,119,242,0.4);
+  background: rgba(59,89,152,0.16);
+  border-color: rgba(59,89,152,0.4);
   transform: translateX(4px);
-  box-shadow: 0 0 25px rgba(24,119,242,0.15);
+  box-shadow: 0 0 25px rgba(59,89,152,0.15);
 }
 
 /* Phone */
@@ -1018,10 +1018,9 @@ body {
   color: var(--gold);
   border-color: rgba(212,168,83,0.2);
 }
-.social-btn.phone svg { stroke: var(--gold); fill: none; }
 .social-btn.phone:hover {
   background: rgba(212,168,83,0.16);
-  border-color: rgba(212,168,83,0.4);
+  border-color: var(--gold);
   transform: translateX(4px);
   box-shadow: 0 0 25px rgba(212,168,83,0.15);
 }
@@ -1029,83 +1028,34 @@ body {
 /* Map */
 .footer-map {
   width: 100%;
-  height: 220px;
-  border-radius: 18px;
+  height: 300px;
+  border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.07);
+  border: 1px solid rgba(212,168,83,0.15);
+  margin-top: 1rem;
 }
 
 .footer-map iframe {
   width: 100%;
   height: 100%;
-  border: 0;
-  filter: grayscale(0.8) brightness(0.65) contrast(1.1);
-  transition: filter 0.4s ease;
+  border: none;
 }
 
-.footer-map:hover iframe {
-  filter: grayscale(0.2) brightness(0.85);
-}
-
+/* Copyright */
 .footer-copy {
-  font-size: 0.72rem;
-  color: rgba(245,242,236,0.2);
+  font-size: 0.75rem;
+  color: rgba(245,242,236,0.25);
   text-align: center;
+  margin-top: 1.5rem;
   font-weight: 300;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  letter-spacing: 0.02em;
 }
-
 
 /* ============================================================
-   RESPONSIVE — TABLET & DESKTOP
+   RESPONSIVE DESIGN
    ============================================================ */
-@media (min-width: 768px) {
-  .menu-item {
-    flex-direction: row;
-    gap: 5rem;
-    padding: 6rem 4rem;
-    text-align: left;
-  }
-
-  .menu-item:nth-child(even) {
-    flex-direction: row-reverse;
-  }
-
-  .menu-item-info {
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .item-tags { justify-content: flex-start; }
-
-  .footer-social-row {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .social-btn { flex: 1; min-width: 180px; justify-content: center; }
-
-  .glass-wrap { width: 160px; height: 300px; }
-  .drinks-slider-wrap { max-width: 800px; }
-  .drink-slide { width: 100px; }
-}
-
-@media (min-width: 1024px) {
-  .menu-item { padding: 6rem 8rem; gap: 7rem; }
-  .food-photo { max-width: 480px; }
-}
-
-/* Hide menu nav when not in menu section */
-.menu-dots, .menu-counter {
-  display: none;
-}
-
-#menu-section.section-active .menu-dots,
-#menu-section.section-active .menu-counter {
-  display: flex;
-}
-
-#menu-section.section-active .menu-counter {
-  display: block;
+@media (max-width: 768px) {
+  .slider-arrow { display: none; }
+  .menu-dots { right: 1rem; }
+  .nav-order-btn { font-size: 0.75rem; padding: 8px 16px; }
 }
