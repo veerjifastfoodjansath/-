@@ -1066,3 +1066,50 @@ body {
   position: relative;
   z-index: 10;
 }
+
+
+/* ============================================================
+   GLOBAL STICKY CART (Always on top)
+   ============================================================ */
+.global-floating-cart {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 99999; /* Massive z-index to stay above videos, overlays, etc. */
+  background: var(--gold);
+  color: #111;
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6), 0 0 15px rgba(212,168,83,0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.global-floating-cart:hover {
+  transform: scale(1.08);
+  background: var(--gold-light);
+}
+
+/* Number badge styling */
+#main-cart-counter {
+  background: #111;
+  color: var(--gold);
+  padding: 2px 8px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+}
+
+/* Mobile Adjustment: Make sure it doesn't hit the edges on small phones */
+@media (max-width: 600px) {
+  .global-floating-cart {
+    top: 15px;
+    right: 15px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+}
