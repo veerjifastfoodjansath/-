@@ -273,12 +273,16 @@
 
       if (cart.length === 0) {
         wrap.innerHTML = `
-          <div class="empty-cart">
-            <div class="empty-icon">🛒</div>
-            <p class="empty-text">Your cart is empty.<br>Add something delicious!</p>
-            <a href="index.html" class="empty-btn">Browse Menu</a>
+          <div class="premium-empty-cart">
+            <div class="empty-icon-ring">
+              <span class="empty-icon">🍽️</span>
+            </div>
+            <h2 class="empty-headline">Your plate is empty</h2>
+            <p class="empty-subtext">Let's fix that. Explore our menu to discover chef's specials and signature fast food.</p>
+            <a href="index.html" class="premium-browse-btn">Explore Menu <span>→</span></a>
           </div>
         `;
+        // We set display to block so the drink slider stays visible!
         document.getElementById('upsell-section').style.display = 'block';
         return;
       }
