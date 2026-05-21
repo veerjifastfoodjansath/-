@@ -1,0 +1,202 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #111;
+  color: #fff;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* ===== TOP NAVIGATION (3 buttons) ===== */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1c1c1c;
+  padding: 15px 25px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  position: sticky;
+  top: 10px;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.nav-btn {
+  background: #e63946;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: 0.3s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-btn:hover {
+  background: #ff4d5e;
+  transform: translateY(-2px);
+}
+
+.cart-btn {
+  position: relative;
+}
+
+.cart-count {
+  background: #fff;
+  color: #e63946;
+  border-radius: 50%;
+  padding: 2px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  background: linear-gradient(45deg, #e63946, #ff8c42);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== PRODUCT GRID ===== */
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.product-card {
+  background: #1c1c1c;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  transition: 0.3s;
+  border: 1px solid #2a2a2a;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 30px rgba(230, 57, 70, 0.3);
+  border-color: #e63946;
+}
+
+.product-img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  margin: 0 auto 15px;
+  display: block;
+  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+}
+
+.product-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.product-desc {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 12px;
+}
+
+.product-price {
+  font-size: 22px;
+  color: #e63946;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.add-cart-btn {
+  background: #e63946;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.add-cart-btn:hover {
+  background: #ff4d5e;
+}
+
+.add-cart-btn.added {
+  background: #28a745;
+}
+
+.go-to-cart-btn {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 8px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+/* ===== SECTION DIVIDER (for Manchurian Half/Full separate) ===== */
+.section-divider {
+  text-align: center;
+  font-size: 28px;
+  margin: 40px 0 20px;
+  color: #ff8c42;
+  border-bottom: 2px solid #333;
+  padding-bottom: 10px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== TOAST NOTIFICATION ===== */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #28a745;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transform: translateX(400px);
+  transition: 0.4s;
+  z-index: 999;
+}
+
+.toast.show {
+  transform: translateX(0);
+}
+
+@media(max-width: 600px) {
+  .page-title { font-size: 26px; }
+  .product-img { width: 140px; height: 140px; }
+  .nav-btn { padding: 8px 14px; font-size: 12px; }
+}
