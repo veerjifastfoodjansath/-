@@ -46,7 +46,7 @@
        ============================================================ -->
   <section id="hero-section">
     <!-- CHANGE HERO VIDEO HERE — place your burger video at video/hero.mp4 -->
-   <video
+    <video
       id="hero-video"
       muted
       playsinline
@@ -102,8 +102,14 @@
     <!-- Sticky header -->
     <div class="menu-sticky-header">
       <span class="menu-label">Our Menu</span>
-      <!-- CHANGE PHONE NUMBER HERE -->
-      <a href="tel:+919286175004" class="nav-order-btn small">Order Now</a>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <!-- Cart icon — shows count badge when items added -->
+        <a href="cart.html" class="nav-order-btn small" id="cart-nav-btn" style="position:relative;">
+          🛒 <span id="cart-count-badge" style="display:none;position:absolute;top:-6px;right:-6px;background:#D4A853;color:#111;font-size:0.6rem;font-weight:700;width:16px;height:16px;border-radius:50%;display:none;align-items:center;justify-content:center;" id="cart-count-badge">0</span>
+        </a>
+        <!-- CHANGE PHONE NUMBER HERE -->
+        <a href="tel:+919286175004" class="nav-order-btn small">Order Now</a>
+      </div>
     </div>
 
     <!-- Menu items scroll container -->
@@ -116,7 +122,7 @@
            Change description: edit the <p> below
            Change image: replace images/menu/white-sauce.png
            ───────────────────────────────────────── -->
-      <div class="menu-item active" data-index="0">
+      <div class="menu-item active" data-index="0" data-item="white-sauce">
         <div class="menu-item-food">
           <!-- CHANGE WHITE SAUCE PASTA IMAGE HERE -->
           <img src="images/menu/white-sauce.png" alt="White Sauce Pasta" class="food-photo" onerror="this.src='https://via.placeholder.com/500x500/111/fff?text=White+Sauce+Pasta'">
@@ -147,7 +153,7 @@
            Change description: edit the <p> below
            Change image: replace images/menu/chowmein.png
            ───────────────────────────────────────── -->
-      <div class="menu-item" data-index="1">
+      <div class="menu-item" data-index="1" data-item="chowmein">
         <div class="menu-item-food">
           <!-- CHANGE CHOWMEIN IMAGE HERE -->
           <img src="images/menu/chowmein.png" alt="Chowmein" class="food-photo" onerror="this.src='https://via.placeholder.com/500x500/111/fff?text=Chowmein'">
@@ -174,7 +180,7 @@
            Change description: edit the <p> below
            Change image: replace images/menu/momos.png
            ───────────────────────────────────────── -->
-      <div class="menu-item" data-index="2">
+      <div class="menu-item" data-index="2" data-item="momos">
         <div class="menu-item-food">
           <!-- CHANGE MOMOS IMAGE HERE -->
           <img src="images/menu/momos.png" alt="Momos" class="food-photo" onerror="this.src='https://via.placeholder.com/500x500/111/fff?text=Momos'">
@@ -201,7 +207,7 @@
            Change description: edit the <p> below
            Change image: replace images/menu/burger.png
            ───────────────────────────────────────── -->
-      <div class="menu-item" data-index="3">
+      <div class="menu-item" data-index="3" data-item="burger">
         <div class="menu-item-food">
           <!-- CHANGE BURGER IMAGE HERE -->
           <img src="images/menu/burger.png" alt="Burger" class="food-photo" onerror="this.src='https://via.placeholder.com/500x500/111/fff?text=Burger'">
@@ -227,7 +233,7 @@
            Change description: edit the <p> below
            Change image: replace images/menu/chilli-potato.png
            ───────────────────────────────────────── -->
-      <div class="menu-item" data-index="4">
+      <div class="menu-item" data-index="4" data-item="chilli-potato">
         <div class="menu-item-food">
           <!-- CHANGE CHILLI POTATO IMAGE HERE -->
           <img src="images/menu/chilli-potato.png" alt="Chilli Potato" class="food-photo" onerror="this.src='https://via.placeholder.com/500x500/111/fff?text=Chilli+Potato'">
@@ -253,7 +259,7 @@
            Change description: edit the <p> below
            Change image: replace images/menu/manchurian.png
            ───────────────────────────────────────── -->
-      <div class="menu-item" data-index="5">
+      <div class="menu-item" data-index="5" data-item="manchurian">
         <div class="menu-item-food">
           <!-- CHANGE MANCHURIAN IMAGE HERE -->
           <img src="images/menu/manchurian.png" alt="Manchurian" class="food-photo" onerror="this.src='https://via.placeholder.com/500x500/111/fff?text=Manchurian'">
@@ -280,7 +286,7 @@
            Change description: edit the <p> below
            Change image: replace images/menu/spring-roll.png
            ───────────────────────────────────────── -->
-      <div class="menu-item" data-index="6">
+      <div class="menu-item" data-index="6" data-item="spring-roll">
         <div class="menu-item-food">
           <!-- CHANGE SPRING ROLL IMAGE HERE -->
           <img src="images/menu/spring-roll.png" alt="Spring Roll" class="food-photo" onerror="this.src='https://via.placeholder.com/500x500/111/fff?text=Spring+Roll'">
@@ -306,7 +312,7 @@
            Change description: edit the <p> below
            Change image: replace images/menu/macaroni.png
            ───────────────────────────────────────── -->
-      <div class="menu-item" data-index="7">
+      <div class="menu-item" data-index="7" data-item="macaroni">
         <div class="menu-item-food">
           <!-- CHANGE MACARONI IMAGE HERE -->
           <img src="images/menu/macaroni.png" alt="Macaroni" class="food-photo" onerror="this.src='https://via.placeholder.com/500x500/111/fff?text=Macaroni'">
@@ -333,7 +339,7 @@
            Change description: edit the <p> below
            Change image: replace images/menu/chole-bhature.png
            ───────────────────────────────────────── -->
-      <div class="menu-item" data-index="8">
+      <div class="menu-item" data-index="8" data-item="chole-bhature">
         <div class="menu-item-food">
           <!-- CHANGE CHOLE BHATURE IMAGE HERE -->
           <img src="images/menu/chole-bhature.png" alt="Chole Bhature" class="food-photo" onerror="this.src='https://via.placeholder.com/500x500/111/fff?text=Chole+Bhature'">
@@ -399,23 +405,27 @@
       <p class="drinks-subtitle">Slide to choose your drink</p>
     </div>
 
-   <!-- Central bottle display -->
+    <!-- Central glass display -->
     <div class="glass-stage">
-      <div class="bottle-display">
-        <img
-          id="active-bottle-img"
-          src="images/drinks/pepsi.png"
-          alt="Selected Drink"
-          style="height:200px; object-fit:contain;
-                 filter:drop-shadow(0 20px 50px rgba(0,0,0,0.7));
-                 animation:foodFloat 4s ease-in-out infinite;
-                 transition:opacity 0.3s ease, transform 0.3s ease;"
-          onerror="this.style.display='none'"
-        >
+      <div class="glass-wrap">
+        <div class="glass-body">
+          <div class="glass-rim"></div>
+          <!-- Liquid color changes on drink select -->
+          <div class="glass-liquid" id="glass-liquid">
+            <div class="bubble b1"></div>
+            <div class="bubble b2"></div>
+            <div class="bubble b3"></div>
+            <div class="bubble b4"></div>
+            <div class="liquid-surface"></div>
+          </div>
+          <div class="ice i1"></div>
+          <div class="ice i2"></div>
+          <div class="ice i3"></div>
+          <div class="glass-shine"></div>
+          <div class="glass-cond c1"></div>
+          <div class="glass-cond c2"></div>
+        </div>
       </div>
-      <p class="glass-drink-name" id="glass-drink-name">Pepsi</p>
-      <p class="glass-drink-sub">Chilled & Fresh — ₹20</p>
-    </div>
       <!-- Current drink name below glass -->
       <p class="glass-drink-name" id="glass-drink-name">Pepsi</p>
       <p class="glass-drink-sub">Chilled & Fresh — ₹20</p>
