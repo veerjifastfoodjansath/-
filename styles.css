@@ -326,9 +326,9 @@ body {
 .menu-bg {
   position: absolute;
   top: 0;
+  bottom: 0;  /* Pin to bottom instead of height: 100% */
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;   /* Pin to right instead of width: 100% */
   
   /* Centers the image and scales it to fit the screen */
   background-size: cover;
@@ -348,7 +348,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 0, 0, 0.5); /* Adjust the 0.7 to make it darker/lighter */
+  background: rgba(10, 10, 10, 0.6); /* Adjust the 0.7 to make it darker/lighter */
   z-index: 2; /* Sits right on top of the image */
 }
 
