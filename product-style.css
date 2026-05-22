@@ -195,8 +195,88 @@ body {
   transform: translateX(0);
 }
 
+/* ============================================================
+   MOBILE OPTIMIZATION (Balanced Medium Layout for Phones)
+   ============================================================ */
 @media(max-width: 600px) {
-  .page-title { font-size: 26px; }
-  .product-img { width: 140px; height: 140px; }
-  .nav-btn { padding: 8px 14px; font-size: 12px; }
+  body {
+    padding: 12px; /* Less padding on edges gives more screen width */
+  }
+
+  /* Medium Top Navigation Layout */
+  .top-nav {
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    top: 5px;
+  }
+  
+  .nav-btn {
+    padding: 8px 12px;
+    font-size: 13px; /* Clean, legible medium size */
+    gap: 4px;
+  }
+
+  .page-title { 
+    font-size: 24px; 
+    margin-bottom: 20px;
+  }
+
+  /* Medium Grid & Cards */
+  .products-container {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 15px;
+    padding: 10px 0;
+  }
+
+  .product-card {
+    padding: 16px; /* Balanced interior spacing */
+    border-radius: 16px;
+  }
+
+  /* Medium Food Images */
+  .product-img { 
+    width: 140px; 
+    height: 140px; 
+    margin-bottom: 12px;
+  }
+
+  /* Proportional Medium Text Sizing */
+  .product-name { 
+    font-size: 18px; 
+    margin-bottom: 6px;
+  }
+
+  .product-desc { 
+    font-size: 13px; 
+    margin-bottom: 10px;
+  }
+
+  .product-price { 
+    font-size: 19px; 
+    margin-bottom: 12px;
+  }
+
+  /* Medium Optimized Interactive Buttons */
+  .add-cart-btn, .go-to-cart-btn {
+    padding: 10px 20px;
+    font-size: 13px; /* Striking the perfect middle ground */
+    border-radius: 20px;
+  }
+}
+
+/* ============================================================
+   BOTTOM SCREEN TEXT STYLING
+   ============================================================ */
+.product-page-footer {
+  text-align: center;
+  padding: 30px 15px 40px;
+  margin-top: 20px;
+  border-top: 1px solid #2a2a2a;
+}
+
+.product-page-footer p {
+  font-size: 14px;
+  color: #888;
+  line-height: 1.5;
+  font-family: 'Poppins', sans-serif;
 }
