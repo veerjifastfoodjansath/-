@@ -264,18 +264,21 @@ body {
 }
 
 /* ============================================================
-   BOTTOM SCREEN TEXT STYLING
+   ENLARGED PRODUCT PAGE FOOTER (For Instructions)
    ============================================================ */
 .product-page-footer {
   text-align: center;
-  padding: 30px 15px 40px;
-  margin-top: 20px;
-  border-top: 1px solid #2a2a2a;
+  padding: 35px 20px 50px;   /* More breathing room at the bottom */
+  margin-top: 40px;
+  border-top: 2px solid #e63946; /* Using your signature red line to make it look official */
+  background: #1c1c1c;       /* Matches your card background to wrap it neatly */
+  border-radius: 15px;       /* Smooth rounded corners */
 }
 
 .product-page-footer p {
-  font-size: 14px;
-  color: #888;
-  line-height: 1.5;
+  font-size: 18px;           /* Enlarged from 14px so it's instantly readable */
+  color: #ffffff;            /* Bright crisp white so it pops off the dark screen */
+  line-height: 1.8;          /* Adds extra spacing between lines */
+  font-weight: 600;          /* Semi-bold weight to give instructions authority */
   font-family: 'Poppins', sans-serif;
 }
