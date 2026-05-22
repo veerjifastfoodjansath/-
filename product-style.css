@@ -196,71 +196,70 @@ body {
 }
 
 /* ============================================================
-   MOBILE OPTIMIZATION (Balanced Medium Layout for Phones)
+   MOBILE OPTIMIZATION (UPSCALED BIG & BOLD LAYOUT)
    ============================================================ */
 @media(max-width: 600px) {
   body {
-    padding: 12px; /* Less padding on edges gives more screen width */
+    padding: 15px; 
   }
 
-  /* Medium Top Navigation Layout */
+  /* Big Navigation Buttons */
   .top-nav {
-    padding: 10px 15px;
-    margin-bottom: 20px;
-    top: 5px;
+    padding: 12px 18px;
+    margin-bottom: 25px;
   }
   
   .nav-btn {
-    padding: 8px 12px;
-    font-size: 13px; /* Clean, legible medium size */
-    gap: 4px;
+    padding: 10px 15px; /* Thicker buttons */
+    font-size: 14px;    /* Larger nav text */
   }
 
   .page-title { 
-    font-size: 24px; 
-    margin-bottom: 20px;
+    font-size: 30px;    /* Big, bold page heading */
+    margin-bottom: 25px;
   }
 
-  /* Medium Grid & Cards */
+  /* Expanded Grid Containers */
   .products-container {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 15px;
-    padding: 10px 0;
+    /* Increased from 240px to 270px so the big cards stretch wide on the phone screen */
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 20px;
   }
 
   .product-card {
-    padding: 16px; /* Balanced interior spacing */
-    border-radius: 16px;
+    padding: 22px;      /* Generous interior spacing for a premium card feel */
+    border-radius: 18px;
   }
 
-  /* Medium Food Images */
+  /* Massive Food Images */
   .product-img { 
-    width: 140px; 
-    height: 140px; 
-    margin-bottom: 12px;
+    width: 175px;       /* Increased from 140px */
+    height: 175px;      /* Increased from 140px */
+    margin-bottom: 15px;
   }
 
-  /* Proportional Medium Text Sizing */
+  /* High-Contrast Text Sizing */
   .product-name { 
-    font-size: 18px; 
-    margin-bottom: 6px;
+    font-size: 22px;    /* Big item names */
+    margin-bottom: 8px;
   }
 
   .product-desc { 
-    font-size: 13px; 
-    margin-bottom: 10px;
-  }
-
-  .product-price { 
-    font-size: 19px; 
+    font-size: 14px;    /* Balanced description size */
     margin-bottom: 12px;
   }
 
-  /* Medium Optimized Interactive Buttons */
+  .product-price { 
+    font-size: 23px;    /* Sharp, highly visible pricing */
+    margin-bottom: 15px;
+  }
+
+  /* Heavy-Duty Interactive Action Buttons */
   .add-cart-btn, .go-to-cart-btn {
-    padding: 10px 20px;
-    font-size: 13px; /* Striking the perfect middle ground */
-    border-radius: 20px;
+    padding: 12px 24px; /* Makes the button thick and incredibly easy to tap */
+    font-size: 15px;    /* Large, high-visibility action text */
+    border-radius: 25px;
+    letter-spacing: 0.5px;
   }
 }
 
