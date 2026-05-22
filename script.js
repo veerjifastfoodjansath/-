@@ -469,3 +469,34 @@ function addToCart(itemName, itemPrice, btnElement) {
     }, 1500);
   }
 }
+
+
+<script>
+    function sendInquiry(event) {
+      // 1. Stop the page from reloading
+      event.preventDefault(); 
+
+      // 2. Grab what the customer typed
+      var customerName = document.getElementById('inq-name').value;
+      var customerPhone = document.getElementById('inq-phone').value;
+      var customerAddress = document.getElementById('inq-address').value;
+
+      // 3. Build the text message safely
+      var textMsg = "Hello Veer Ji Fast Food! 👋\n\n";
+      textMsg += "I want to get the HEAVY DISCOUNT on a bulk order.\n\n";
+      textMsg += "*Customer Details:*\n";
+      textMsg += "• Name: " + customerName + "\n";
+      textMsg += "• Phone: " + customerPhone + "\n";
+      textMsg += "• Address: " + customerAddress + "\n\n";
+      textMsg += "Please contact me back!";
+
+      // 4. Create the WhatsApp Link with your shop's number
+      var waLink = "https://wa.me/919286175004?text=" + encodeURIComponent(textMsg);
+      
+      // 5. Open WhatsApp in a new tab
+      window.open(waLink, '_blank');
+
+      // 6. Clear the form after they send it
+      document.getElementById('wa-inquiry-form').reset();
+    }
+  </script>
