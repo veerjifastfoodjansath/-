@@ -315,32 +315,28 @@ body {
    MENU SECTION BACKGROUND (Fixed & Static)
    ============================================================ */
 
-/* 1. The main section must be relative so the background knows its boundaries */
+/* ============================================================
+   MENU SECTION (Fixed Background + Dark Overlay)
+   ============================================================ */
 #menu-section {
   position: relative;
-  min-height: 100vh; /* Ensures the section is at least the height of the screen */
-  /* Remove overflow: hidden if you have it, it can break sticky headers! */
-}
-
-/* 2. The Background Image Div */
-.menu-bg {
-  position: absolute;
-  top: 0;
-  bottom: 0;  /* Pin to bottom instead of height: 100% */
-  left: 0;
-  right: 0;   /* Pin to right instead of width: 100% */
+  min-height: 100vh;
   
-  /* Centers the image and scales it to fit the screen */
+  /* THIS IS THE MAGIC: It creates a 75% dark overlay AND loads the image at the same time */
+  background: linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.75)), url('./images/kitchen-bg.png');
+  
+  /* This freezes it perfectly to the glass of the screen */
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
   background-repeat: no-repeat;
-  
-  /* THE MAGIC LINE: This freezes the image to the camera lens */
-  background-attachment: fixed; 
-  
-  z-index: 1; /* Puts it at the very back */
 }
 
+.menu-sticky-header,
+.menu-items-wrap {
+  position: relative;
+  z-index: 10;
+}
 /* 3. The Dark Overlay (So white text is readable) */
 .menu-bg-overlay {
   position: absolute;
