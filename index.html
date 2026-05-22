@@ -656,6 +656,90 @@
     </div>
   </footer>
 
+  <script>
+    // FIX 1: This automatically updates your cart bubble when the page opens!
+    function initCartCounter() {
+      try {
+        var cart = JSON.parse(sessionStorage.getItem('veerji_cart') || '[]');
+        var totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+        var counterEl = document.getElementById('main-cart-counter');
+        if (counterEl) {
+          counterEl.textContent = totalItems;
+        }
+      } catch(e) { console.log(e); }
+    }
+
+    // FIX 2: The fixed drink-adding brain
+    function addCurrentDrinkToCart(btnElement) {
+      var nameEl = document.getElementById('glass-drink-name');
+      if (!nameEl) return;
+      
+      var drinkName = nameEl.textContent.trim();
+      var drinkPrice = 20; // Default price
+
+      // Smart check: Campa drinks are ₹15, others are ₹20
+      if (drinkName.toLowerCase().includes('campa')) {
+        drinkPrice = 15;
+      }
+
+      var itemID = 'drink-' + drinkName.toLowerCase().replace(/\s+/g, '-');
+      var cart = JSON.parse(sessionStorage.getItem('veerji_cart') || '[]');
+
+      // Check if drink already exists
+      var existingItem = cart.find(function(item) { return item.id === itemID; });
+      if (existingItem) {
+        existingItem.qty += 1;
+      } else {
+        cart.push({
+          id: itemID,
+          name: drinkName,
+          price: drinkPrice,
+          parent: 'Cold Drinks',
+          qty: 1
+        });
+      }
+
+      // Save back to memory
+      sessionStorage.setItem('veerji_cart', JSON.stringify(cart));
+
+      // INSTANTLY update the counter bubble on screen!
+      var totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      var counterEl = document.getElementById('main-cart-counter');
+      if (counterEl) {
+        counterEl.textContent = totalItems;
+      }
+
+      // Smooth green button animation feedback
+      if (btnElement) {
+        var originalText = btnElement.innerHTML;
+        btnElement.innerHTML = 'Added ✓';
+        btnElement.style.background = '#25D366'; // WhatsApp Green
+        btnElement.style.color = '#fff';
+        setTimeout(function() {
+          btnElement.innerHTML = originalText;
+          btnElement.style.background = '';
+          btnElement.style.color = '';
+        }, 1500);
+      }
+    }
+
+    // WhatsApp Inquiry Logic from earlier
+    function sendInquiry(event) {
+      event.preventDefault(); 
+      var customerName = document.getElementById('inq-name').value;
+      var customerPhone = document.getElementById('inq-phone').value;
+      var customerAddress = document.getElementById('inq-address').value;
+
+      var textMsg = "Hello Veer Ji Fast Food! 👋\n\nI want to get the HEAVY DISCOUNT on a bulk order.\n\n*Customer Details:*\n• Name: " + customerName + "\n• Phone: " + customerPhone + "\n• Address: " + customerAddress + "\n\nPlease contact me back!";
+      var waLink = "https://wa.me/919286175004?text=" + encodeURIComponent(textMsg);
+      window.open(waLink, '_blank');
+      document.getElementById('wa-inquiry-form').reset();
+    }
+
+    // Run the counter check automatically as soon as the page loads
+    window.addEventListener('DOMContentLoaded', initCartCounter);
+  </script>
+
   <script src="script.js"></script>
 </body>
 </html>
