@@ -414,7 +414,7 @@ function resetDrinkButton() {
 
 /* ============================================================
    UNIVERSAL ADD TO CART ENGINE (For all menu pages)
-   ============================================================ */
+   ============================================================ 
 function addToCart(itemName, itemPrice, btnElement) {
   // 1. Create a clean ID based on the item's name
   const itemID = 'item-' + itemName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
@@ -499,4 +499,4 @@ function addToCart(itemName, itemPrice, btnElement) {
       // 6. Clear the form after they send it
       document.getElementById('wa-inquiry-form').reset();
     }
-  </script>
+  </script> */
